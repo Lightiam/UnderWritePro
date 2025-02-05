@@ -1,15 +1,9 @@
 # UnderWritePro
 
-AI-based credit scoring platform using Python, scikit-learn, and FastAPI.
+AI-powered credit scoring platform with an intuitive chat interface.
 
 ## Features
-- Credit score prediction using machine learning
-- Interactive chat interface
+- ChatGPT-like interface for credit score assessment
 - File upload support for document processing
-- Real-time credit score calculation
-
-## Tech Stack
-- Python with FastAPI
-- scikit-learn for ML model
-- React with TypeScript for frontend
-- Tailwind CSS for styling
+- Modern, responsive design
+- Real-time credit score predictions

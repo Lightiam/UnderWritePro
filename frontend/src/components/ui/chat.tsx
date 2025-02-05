@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import { Paperclip, Send } from 'lucide-react';
 import { Button } from './button.tsx';
 import { Alert, AlertDescription } from './alert';
 
 export function Chat() {
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState<Array<{ content: string | JSX.Element; isUser: boolean }>>([]);
+  const [messages, setMessages] = useState<Array<{ content: string | ReactNode; isUser: boolean }>>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {

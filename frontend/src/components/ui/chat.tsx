@@ -1,19 +1,22 @@
 import { useState } from 'react';
 import { Paperclip, Send } from 'lucide-react';
+import { Button } from './button';
 
 export function Chat() {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<Array<{ content: string; isUser: boolean }>>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!message.trim()) return;
+    if (!message.trim() || isLoading) return;
 
+    setIsLoading(true);
     setMessages(prev => [...prev, { content: message, isUser: true }]);
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:8000/chat', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: message }),
@@ -23,41 +26,73 @@ export function Chat() {
       setMessages(prev => [...prev, { content: data.response, isUser: false }]);
     } catch (error) {
       console.error('Error:', error);
+      setMessages(prev => [...prev, { 
+        content: "Sorry, I couldn't process your request. Please try again.", 
+        isUser: false 
+      }]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
+    if (!file || isLoading) return;
 
+    setIsLoading(true);
     const formData = new FormData();
     formData.append('file', file);
 
     try {
-      const response = await fetch('http://localhost:8000/upload', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
         method: 'POST',
         body: formData,
       });
       
       const data = await response.json();
-      setMessages(prev => [...prev, { content: `File processed: ${data.message}`, isUser: false }]);
+      setMessages(prev => [...prev, { 
+        content: `Processing file: ${file.name}...`, 
+        isUser: true 
+      }]);
+      setMessages(prev => [...prev, { 
+        content: data.message || 'File processed successfully', 
+        isUser: false 
+      }]);
     } catch (error) {
       console.error('Error:', error);
+      setMessages(prev => [...prev, { 
+        content: "Sorry, I couldn't process your file. Please try again.", 
+        isUser: false 
+      }]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col h-screen bg-white">
+    <div className="flex flex-col h-[calc(100vh-4rem)] bg-white rounded-lg shadow-sm border">
+      <div className="p-4 border-b">
+        <h2 className="text-lg font-semibold text-slate-900">Credit Score Assistant</h2>
+        <p className="text-sm text-slate-500">Upload documents or ask questions about credit scoring</p>
+      </div>
+
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((msg, index) => (
           <div key={index} className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}>
             <div className={`max-w-[80%] rounded-lg px-4 py-2 ${
-              msg.isUser ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-900'
+              msg.isUser ? 'bg-purple-600 text-white' : 'bg-slate-100 text-slate-900'
             }`}>
               {msg.content}
             </div>
           </div>
         ))}
+        {isLoading && (
+          <div className="flex justify-start">
+            <div className="bg-slate-100 text-slate-900 rounded-lg px-4 py-2">
+              Thinking...
+            </div>
+          </div>
+        )}
       </div>
       
       <form onSubmit={handleSubmit} className="border-t p-4 flex items-center gap-2">
@@ -66,26 +101,31 @@ export function Chat() {
           onChange={handleFileUpload}
           className="hidden"
           id="file-upload"
+          accept=".csv,.pdf,.doc,.docx"
+          disabled={isLoading}
         />
-        <label
-          htmlFor="file-upload"
-          className="p-2 hover:bg-gray-100 rounded-full cursor-pointer"
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          asChild
+          disabled={isLoading}
         >
-          <Paperclip className="w-5 h-5 text-gray-500" />
-        </label>
+          <label htmlFor="file-upload" className="cursor-pointer">
+            <Paperclip className="w-5 h-5" />
+          </label>
+        </Button>
         <input
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type your message..."
-          className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-600"
+          className="flex-1 bg-slate-50 rounded-lg px-4 py-2 text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-600 disabled:opacity-50"
+          disabled={isLoading}
         />
-        <button
-          type="submit"
-          className="bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700"
-        >
+        <Button type="submit" disabled={isLoading || !message.trim()}>
           <Send className="w-5 h-5" />
-        </button>
+        </Button>
       </form>
     </div>
   );

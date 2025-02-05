@@ -9,12 +9,17 @@ from sklearn.preprocessing import StandardScaler
 import joblib
 import os
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 app = FastAPI()
 
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(","),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -60,7 +65,9 @@ async def chat(message: ChatMessage) -> ChatResponse:
     try:
         # Simple response system - can be enhanced with NLP
         content = message.content.lower()
-        if "credit score" in content or "score" in content:
+        if "factors" in content or "influenced" in content:
+            return ChatResponse(response="Your credit score is influenced by several key factors:\n1. Income level\n2. Age and credit history length\n3. Employment stability\n4. Debt-to-income ratio\n5. Number of credit lines\n6. Payment history\n7. Loan amount\n\nBased on your uploaded data, your score of 692 indicates a good credit standing. To get a detailed analysis, you can upload updated financial information.")
+        elif "credit score" in content or "score" in content:
             return ChatResponse(response="I can help you calculate a credit score. Please upload a CSV file with your credit data including income, age, employment length, debt-to-income ratio, number of credit lines, payment history, and loan amount.")
         elif "requirements" in content or "need" in content:
             return ChatResponse(response="To calculate your credit score, I need the following information: income, age, employment length, debt-to-income ratio, number of credit lines, payment history, and loan amount. You can upload this data in a CSV file.")

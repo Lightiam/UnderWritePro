@@ -61,10 +61,24 @@ export function Chat() {
         content: `Processing file: ${file.name}...`, 
         isUser: true 
       }]);
-      setMessages(prev => [...prev, { 
-        content: data.message || 'File processed successfully', 
-        isUser: false 
-      }]);
+      
+      if (data.credit_score) {
+        setMessages(prev => [...prev, { 
+          content: (
+            <div className="space-y-2">
+              <div className="font-medium">Credit Score Analysis</div>
+              <div className="text-2xl font-bold">{Math.round(data.credit_score)}</div>
+              <div className="text-sm">{data.details}</div>
+            </div>
+          ), 
+          isUser: false 
+        }]);
+      } else {
+        setMessages(prev => [...prev, { 
+          content: data.message || 'File processed successfully', 
+          isUser: false 
+        }]);
+      }
     } catch (error) {
       console.error('Error:', error);
       setMessages(prev => [...prev, { 

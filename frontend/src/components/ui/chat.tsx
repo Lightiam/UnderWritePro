@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Paperclip, Send } from 'lucide-react';
-import { Button } from './button';
+import { Button } from './button.tsx';
+import { Alert, AlertDescription } from './alert';
 
 export function Chat() {
   const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState<Array<{ content: string; isUser: boolean }>>([]);
+  const [messages, setMessages] = useState<Array<{ content: string | JSX.Element; isUser: boolean }>>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,7 +28,13 @@ export function Chat() {
     } catch (error) {
       console.error('Error:', error);
       setMessages(prev => [...prev, { 
-        content: "Sorry, I couldn't process your request. Please try again.", 
+        content: (
+          <Alert variant="destructive">
+            <AlertDescription>
+              Sorry, I couldn't process your request. Please try again.
+            </AlertDescription>
+          </Alert>
+        ),
         isUser: false 
       }]);
     } finally {
@@ -61,7 +68,13 @@ export function Chat() {
     } catch (error) {
       console.error('Error:', error);
       setMessages(prev => [...prev, { 
-        content: "Sorry, I couldn't process your file. Please try again.", 
+        content: (
+          <Alert variant="destructive">
+            <AlertDescription>
+              Sorry, I couldn't process your file. Please try again.
+            </AlertDescription>
+          </Alert>
+        ),
         isUser: false 
       }]);
     } finally {

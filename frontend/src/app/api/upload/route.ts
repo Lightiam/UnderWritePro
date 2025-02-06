@@ -1,0 +1,21 @@
+import { NextResponse } from 'next/server';
+
+export async function POST(req: Request) {
+  try {
+    const formData = await req.formData();
+    
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/upload`, {
+      method: 'POST',
+      body: formData,
+    });
+    
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error('Error:', error);
+    return NextResponse.json(
+      { error: 'Failed to process file' },
+      { status: 500 }
+    );
+  }
+}

@@ -1,0 +1,4 @@
+age,income,employment_length,debt_to_income,num_credit_lines,payment_history,loan_amount,credit_history,employment_duration
+35,75000,10,0.3,3,good,25000,good,5
+42,95000,15,0.25,5,excellent,35000,excellent,8
+28,45000,3,0.4,2,fair,15000,fair,2

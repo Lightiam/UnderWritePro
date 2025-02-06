@@ -3,6 +3,8 @@
 import * as React from 'react';
 import { Button } from '@/components/ui/button';
 import { Paperclip, Send, Loader2, Bot, User } from 'lucide-react';
+import { ErrorMessage } from './error-message';
+import { CreditScore } from './credit-score';
 import { cn } from '@/lib/utils';
 
 interface Message {
@@ -12,7 +14,11 @@ interface Message {
 
 export function Chat() {
   const [messages, setMessages] = React.useState<Message[]>([{
-    content: "Hello! I'm your AI credit scoring assistant. I can help analyze credit data and provide insights. You can upload a CSV file with credit information or ask me questions about credit scoring.",
+    content: (
+      <div className="prose prose-sm max-w-none">
+        Hello! I'm your AI credit scoring assistant. I can help analyze credit data and provide insights. You can upload a CSV file with credit information or ask me questions about credit scoring.
+      </div>
+    ),
     isUser: false
   }]);
   const [message, setMessage] = React.useState('');
@@ -33,54 +39,58 @@ export function Chat() {
     if (!message.trim() || isLoading) return;
 
     setIsLoading(true);
-    setMessages(prev => [...prev, { content: message, isUser: true }]);
+    setMessages(prev => [...prev, { 
+      content: (
+        <div className="prose prose-sm max-w-none">
+          {message}
+        </div>
+      ), 
+      isUser: true 
+    }]);
     setMessage('');
 
     try {
-      const response = await fetch('/api/chat', {
+      setMessages(prev => [...prev, {
+        content: (
+          <div className="flex items-center gap-2 text-gray-600">
+            <Loader2 className="h-5 w-5 animate-spin" />
+            Processing your request...
+          </div>
+        ),
+        isUser: false
+      }]);
+
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/chat`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
         body: JSON.stringify({ content: message }),
       });
-      
+
       if (!response.ok) {
         throw new Error('Failed to process chat request');
       }
 
       const data = await response.json();
-      
-      if (data.credit_score) {
-        setMessages(prev => [...prev, { 
+
+      setMessages(prev => {
+        const messages = prev.slice(0, -1); // Remove loading message
+        return [...messages, {
           content: (
-            <div className="space-y-4">
-              <div className="text-lg font-semibold">Credit Score Analysis</div>
-              <div className="flex items-center gap-4">
-                <div className="text-4xl font-bold text-purple-600">
-                  {Math.round(data.credit_score)}
-                </div>
-                <div className="text-sm text-gray-600">
-                  Credit Score
-                </div>
-              </div>
-              <div className="text-sm text-gray-700 whitespace-pre-line">
-                {data.details}
-              </div>
+            <div className="prose prose-sm max-w-none">
+              {data.response}
             </div>
           ),
-          isUser: false 
-        }]);
-      } else {
-        setMessages(prev => [...prev, { content: data.response, isUser: false }]);
-      }
+          isUser: false
+        }];
+      });
     } catch (error) {
       console.error('Error:', error);
-      setMessages(prev => [...prev, { 
-        content: (
-          <div className="text-red-500">
-            Sorry, I couldn't process your request. Please try again.
-          </div>
-        ),
-        isUser: false 
+      setMessages(prev => [...prev.slice(0, -1), {
+        content: <ErrorMessage message="Failed to process your request. Please try again." />,
+        isUser: false
       }]);
     } finally {
       setIsLoading(false);
@@ -93,13 +103,12 @@ export function Chat() {
 
     if (!file.name.endsWith('.csv')) {
       setMessages(prev => [...prev, { 
-        content: (
-          <div className="text-red-500">
-            Please upload a CSV file containing credit data.
-          </div>
-        ),
+        content: <ErrorMessage message="Please upload a CSV file containing credit data." />,
         isUser: false 
       }]);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
       return;
     }
 
@@ -107,18 +116,30 @@ export function Chat() {
     const formData = new FormData();
     formData.append('file', file);
 
-    try {
-      setMessages(prev => [...prev, { 
-        content: (
-          <div className="text-gray-600">
-            Processing file: {file.name}...
-          </div>
-        ), 
-        isUser: true 
-      }]);
+    setMessages(prev => [...prev, {
+      content: (
+        <div className="flex items-center gap-2 text-sm">
+          <Paperclip className="h-4 w-4" />
+          {file.name}
+        </div>
+      ),
+      isUser: true
+    }, {
+      content: (
+        <div className="flex items-center gap-2 text-gray-600">
+          <Loader2 className="h-5 w-5 animate-spin" />
+          Analyzing credit data from {file.name}...
+        </div>
+      ),
+      isUser: false
+    }]);
 
-      const response = await fetch('/api/upload', {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/upload`, {
         method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+        },
         body: formData,
       });
       
@@ -129,42 +150,25 @@ export function Chat() {
       const data = await response.json();
       
       if (data.credit_score) {
-        setMessages(prev => [...prev, { 
+        setMessages(prev => [...prev.slice(0, -1), {
+          content: <CreditScore score={data.credit_score} details={data.details} />,
+          isUser: false
+        }]);
+      } else {
+        setMessages(prev => [...prev.slice(0, -1), {
           content: (
-            <div className="space-y-4 bg-white rounded-lg p-6 shadow-lg">
-              <div className="text-xl font-semibold text-purple-600">Credit Score Analysis</div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="text-5xl font-bold text-purple-600">
-                    {Math.round(data.credit_score)}
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    Credit Score
-                  </div>
-                </div>
-                <div className="text-sm px-3 py-1 rounded-full bg-purple-100 text-purple-600">
-                  {data.credit_score >= 700 ? 'Excellent' : 
-                   data.credit_score >= 650 ? 'Good' :
-                   data.credit_score >= 600 ? 'Fair' : 'Poor'}
-                </div>
-              </div>
-              <div className="text-sm text-gray-700 whitespace-pre-line mt-4">
-                {data.details}
-              </div>
+            <div className="prose prose-sm max-w-none">
+              {data.response || 'Failed to analyze credit data. Please try again.'}
             </div>
-          ), 
-          isUser: false 
+          ),
+          isUser: false
         }]);
       }
     } catch (error) {
       console.error('Error:', error);
-      setMessages(prev => [...prev, { 
-        content: (
-          <div className="text-red-500">
-            Sorry, I couldn't process your file. Please try again.
-          </div>
-        ),
-        isUser: false 
+      setMessages(prev => [...prev.slice(0, -1), {
+        content: <ErrorMessage message="Failed to process the file. Please ensure it contains valid credit data and try again." />,
+        isUser: false
       }]);
     } finally {
       setIsLoading(false);
@@ -176,20 +180,20 @@ export function Chat() {
 
   return (
     <div className="flex flex-col h-full bg-white rounded-lg shadow-lg">
-      <div className="flex-1 overflow-y-auto p-4 space-y-6">
+      <div className="flex-1 overflow-y-auto p-6 space-y-8">
         {messages.map((msg, idx) => (
           <div
             key={idx}
             className={cn(
-              "flex items-start gap-3",
+              "flex items-start gap-4",
               msg.isUser ? "flex-row-reverse" : "flex-row"
             )}
           >
             <div className={cn(
-              "flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-full border shadow-sm",
-              msg.isUser ? "bg-purple-600 text-white" : "bg-white"
+              "flex h-10 w-10 shrink-0 select-none items-center justify-center rounded-full shadow-md",
+              msg.isUser ? "bg-gradient-to-br from-purple-600 to-purple-700 text-white" : "bg-white border border-gray-100"
             )}>
-              {msg.isUser ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
+              {msg.isUser ? <User className="h-5 w-5" /> : <Bot className="h-5 w-5" />}
             </div>
             <div
               className={cn(
@@ -204,8 +208,8 @@ export function Chat() {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="border-t bg-white p-4">
-        <form onSubmit={handleSubmit} className="flex gap-2">
+      <div className="border-t bg-white p-6">
+        <form onSubmit={handleSubmit} className="flex gap-3">
           <input
             type="file"
             accept=".csv"
@@ -219,7 +223,7 @@ export function Chat() {
             size="icon"
             onClick={() => fileInputRef.current?.click()}
             disabled={isLoading}
-            className="chat-button"
+            className="chat-button chat-button-ghost"
           >
             <Paperclip className="h-5 w-5" />
           </Button>
@@ -233,8 +237,8 @@ export function Chat() {
           />
           <Button 
             type="submit" 
-            disabled={isLoading}
-            className="chat-button bg-purple-600 text-white hover:bg-purple-700"
+            disabled={isLoading || !message.trim()}
+            className="chat-button chat-button-primary"
           >
             {isLoading ? (
               <Loader2 className="h-5 w-5 animate-spin" />

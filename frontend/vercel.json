@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "buildCommand": "yarn build",
+  "outputDirectory": ".next",
+  "installCommand": "yarn install",
+  "framework": "nextjs",
+  "env": {
+    "NEXT_PUBLIC_BACKEND_URL": "https://api.underwritepro.com"
+  }
+}

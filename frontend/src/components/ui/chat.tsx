@@ -18,7 +18,7 @@ export function Chat() {
     setMessage('');
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: message }),
@@ -52,7 +52,7 @@ export function Chat() {
     formData.append('file', file);
 
     try {
-      const response = await fetch('/api/upload', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/upload`, {
         method: 'POST',
         body: formData,
       });

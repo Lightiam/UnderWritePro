@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: underwritepro-backend
+    env: python
+    buildCommand: pip install poetry && poetry install
+    startCommand: poetry run gunicorn --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT underwritepro.main:app
+    envVars:
+      - key: ALLOWED_ORIGINS
+        value: https://frontend-nvtgqf7py-lightiams-projects.vercel.app
+      - key: MODEL_PATH
+        value: /app/src/underwritepro/models/credit_scoring_model.joblib
+      - key: SCALER_PATH
+        value: /app/src/underwritepro/models/feature_scaler.joblib

@@ -1,5 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { MobileMenu } from '@/components/ui/mobile-menu';
 import { useNavigate } from 'react-router-dom';
 
 export function Landing() {
@@ -17,13 +18,16 @@ export function Landing() {
             <div className="flex items-center">
               <div className="text-purple-600 font-bold text-xl">UnderWritePro</div>
             </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#product" className="text-slate-600 hover:text-slate-900 font-medium">Product</a>
-              <a href="#solutions" className="text-slate-600 hover:text-slate-900 font-medium">Solutions</a>
-              <a href="#responsible-ai" className="text-slate-600 hover:text-slate-900 font-medium">Responsible AI</a>
-              <a href="#partners" className="text-slate-600 hover:text-slate-900 font-medium">Partners</a>
-              <a href="#resources" className="text-slate-600 hover:text-slate-900 font-medium">Resources</a>
-              <Button size="lg" onClick={() => navigate('/chat')}>Get Started</Button>
+            <div className="flex items-center">
+              <div className="hidden md:flex items-center space-x-8">
+                <a href="#product" className="text-slate-600 hover:text-slate-900 font-medium">Product</a>
+                <a href="#solutions" className="text-slate-600 hover:text-slate-900 font-medium">Solutions</a>
+                <a href="#responsible-ai" className="text-slate-600 hover:text-slate-900 font-medium">Responsible AI</a>
+                <a href="#partners" className="text-slate-600 hover:text-slate-900 font-medium">Partners</a>
+                <a href="#resources" className="text-slate-600 hover:text-slate-900 font-medium">Resources</a>
+                <Button size="lg" onClick={() => navigate('/chat')}>Get Started</Button>
+              </div>
+              <MobileMenu />
             </div>
           </div>
         </div>

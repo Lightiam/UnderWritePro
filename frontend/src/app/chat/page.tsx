@@ -1,28 +1,37 @@
-'use client';
-
-import * as React from 'react';
 import { Chat } from '@/components/ui/chat';
 
 export default function ChatPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <div className="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-2 px-4 text-center text-sm">
-        The Role of AI and IDP in Underwriting's Future →
-      </div>
-      
-      <nav className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16 items-center">
-            <div className="flex items-center">
-              <div className="text-purple-600 font-bold text-xl">UnderWritePro</div>
+    <div className="flex flex-col h-screen bg-gray-50">
+      <header className="bg-white border-b border-gray-100">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <h1 className="text-2xl font-semibold text-purple-600">UnderwritePro AI</h1>
+              <span className="px-3 py-1 text-sm rounded-full bg-purple-100 text-purple-600 font-medium">
+                Beta
+              </span>
+            </div>
+            <div className="flex items-center space-x-6">
+              <div className="text-sm text-gray-500">AI-Powered Credit Scoring</div>
+              <Link href="/" className="text-sm text-purple-600 hover:text-purple-700 font-medium">
+                Dashboard
+              </Link>
             </div>
           </div>
         </div>
-      </nav>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="bg-white rounded-xl shadow-lg border border-slate-200 h-[calc(100vh-12rem)]">
-          <Chat />
+      </header>
+      <main className="flex-1 container mx-auto px-6 py-6 overflow-hidden">
+        <div className="h-full max-w-5xl mx-auto">
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold text-gray-900">Credit Analysis Assistant</h2>
+            <p className="mt-1 text-sm text-gray-500">
+              Upload credit data or ask questions about credit scoring
+            </p>
+          </div>
+          <div className="bg-white rounded-lg shadow-lg h-[calc(100%-6rem)]">
+            <Chat />
+          </div>
         </div>
       </main>
     </div>

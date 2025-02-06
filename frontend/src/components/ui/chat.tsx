@@ -16,7 +16,7 @@ export function Chat() {
   const [messages, setMessages] = React.useState<Message[]>([{
     content: (
       <div className="prose prose-sm max-w-none">
-        Hello! I'm your AI credit scoring assistant. I can help analyze credit data and provide insights. You can upload a CSV file with credit information or ask me questions about credit scoring.
+        Hello! I&apos;m your AI credit scoring assistant. I can help analyze credit data and provide insights. You can upload a CSV file with credit information or ask me questions about credit scoring.
       </div>
     ),
     isUser: false

@@ -2,33 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/underwritepro/main.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "15mb",
-        "runtime": "python3.12"
-      }
+      "src": "api/index.py",
+      "use": "@vercel/python"
     }
   ],
   "routes": [
     {
-      "src": "/chat",
-      "methods": ["POST"],
-      "dest": "src/underwritepro/main.py"
-    },
-    {
-      "src": "/upload",
-      "methods": ["POST"],
-      "dest": "src/underwritepro/main.py"
-    },
-    {
-      "src": "/health",
-      "methods": ["GET"],
-      "dest": "src/underwritepro/main.py"
-    },
-    {
       "src": "/(.*)",
-      "dest": "src/underwritepro/main.py"
+      "dest": "api/index.py"
     }
   ]
 }

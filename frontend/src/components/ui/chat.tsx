@@ -17,7 +17,7 @@ export function Chat() {
     setMessage('');
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/chat`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://underwritepro-backend.onrender.com'}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: message }),
@@ -51,7 +51,7 @@ export function Chat() {
     formData.append('file', file);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://underwritepro-backend.onrender.com'}/upload`, {
         method: 'POST',
         body: formData,
       });

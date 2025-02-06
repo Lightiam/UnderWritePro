@@ -1,7 +1,8 @@
 import { useState, ReactNode } from 'react';
-import { Paperclip, Send } from 'lucide-react';
+import { Paperclip, Send, Bot, ArrowLeft } from 'lucide-react';
 import { Button } from './button';
 import { Alert, AlertDescription } from './alert';
+import Link from 'next/link';
 
 export function Chat() {
   const [message, setMessage] = useState('');
@@ -17,7 +18,7 @@ export function Chat() {
     setMessage('');
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/chat`, {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: message }),
@@ -51,7 +52,7 @@ export function Chat() {
     formData.append('file', file);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/upload`, {
+      const response = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
       });
@@ -97,13 +98,21 @@ export function Chat() {
   };
 
   return (
-    <div className="flex flex-col h-full bg-white">
-      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
+    <div className="flex flex-col h-[calc(100vh-200px)] bg-white">
+      <div className="p-4 border-b flex items-center">
+        <Link href="/" className="text-gray-600 hover:text-gray-800 mr-4">
+          <ArrowLeft className="w-5 h-5" />
+        </Link>
+        <h2 className="text-lg font-semibold">AI Credit Analysis Assistant</h2>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-6 py-8 space-y-6">
         {messages.length === 0 && !isLoading && (
           <div className="text-center text-slate-500 py-12">
-            <h3 className="text-lg font-semibold mb-2">Welcome to UnderWritePro AI Assistant</h3>
-            <p className="text-sm">
-              I can help you analyze credit data and answer questions about underwriting.
+            <Bot className="w-12 h-12 mx-auto mb-4 text-purple-600" />
+            <h3 className="text-xl font-semibold mb-3">Welcome to UnderWritePro AI Assistant</h3>
+            <p className="text-base max-w-md mx-auto">
+              I can help you analyze credit data and provide insights about underwriting.
               Upload a file or start a conversation to begin.
             </p>
           </div>
@@ -159,7 +168,7 @@ export function Chat() {
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Message UnderwritePro..."
+            placeholder="Ask me about credit scoring..."
             className="flex-1 bg-transparent text-gray-900 placeholder-gray-500 outline-none"
             disabled={isLoading}
           />

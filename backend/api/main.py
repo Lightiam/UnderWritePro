@@ -4,8 +4,7 @@ from pydantic import BaseModel
 import os
 from datetime import datetime
 import numpy as np
-from openai import AsyncOpenAI
-import json
+from services.chat import ChatService
 
 app = FastAPI()
 
@@ -20,10 +19,7 @@ app.add_middleware(
 class ChatMessage(BaseModel):
     content: str
 
-client = AsyncOpenAI(
-    api_key=os.getenv("OPENAI_API_KEY"),
-    timeout=30.0
-)
+chat_service = ChatService()
 
 @app.get("/health")
 async def health_check():
@@ -35,26 +31,29 @@ async def chat(message: ChatMessage):
         if not message.content:
             raise HTTPException(status_code=400, detail="Message content cannot be empty")
             
-        response = await client.chat.completions.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are a credit scoring specialist with expertise in financial analysis and risk assessment. Help users understand their credit scores, provide improvement strategies, and analyze credit reports."},
-                {"role": "user", "content": message.content}
-            ],
-            temperature=0.7,
-            max_tokens=800
-        )
-        return {"response": response.choices[0].message.content}
+        response = await chat_service.process_message(message.content)
+        if response.get("status") == "error":
+            raise HTTPException(status_code=500, detail=response.get("error", "Unknown error occurred"))
+            
+        return response
+    except HTTPException as he:
+        raise he
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...)):
     try:
+        if not file or not file.filename:
+            raise HTTPException(status_code=400, detail="No file uploaded")
+            
         if not file.filename.endswith('.csv'):
             raise HTTPException(status_code=400, detail="Only CSV files are supported")
             
         contents = await file.read()
+        if not contents:
+            raise HTTPException(status_code=400, detail="File is empty")
+            
         score = np.random.normal(700, 50)
         score = max(300, min(850, score))
         
@@ -83,5 +82,7 @@ Analysis completed on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
             "details": details.strip()
         }
         
+    except HTTPException as he:
+        raise he
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Error processing file: {str(e)}")

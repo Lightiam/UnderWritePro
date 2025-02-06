@@ -1,15 +1,12 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Landing } from './pages/Landing';
-import { ChatInterface } from './pages/ChatInterface';
+import { Chat } from './components/ui/chat';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/chat" element={<ChatInterface />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Chat />
+      </div>
+    </div>
   );
 }
 

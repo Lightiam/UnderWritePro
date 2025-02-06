@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, ReactNode } from 'react';
 import { Paperclip, Send } from 'lucide-react';
 import { Button } from './button';

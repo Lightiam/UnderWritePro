@@ -16,13 +16,7 @@ const nextConfig = {
     return config
   },
   trailingSlash: true,
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  exportPathMap: async function () {
-    return {
-      '/': { page: '/' },
-      '/chat': { page: '/chat' }
-    }
-  }
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx']
 }
 
 module.exports = nextConfig

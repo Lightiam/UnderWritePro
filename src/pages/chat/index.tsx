@@ -2,9 +2,12 @@ import * as React from 'react'
 import { APP_NAME } from '../../lib/utils'
 import Link from 'next/link'
 import Head from 'next/head'
-import Script from 'next/script'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faPaperclip, faPaperPlane, faHome } from '@fortawesome/free-solid-svg-icons'
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+
+config.autoAddCss = false
 
 export default function ChatPage() {
   const [message, setMessage] = React.useState('')

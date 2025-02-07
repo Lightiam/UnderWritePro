@@ -5,7 +5,7 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL: 'https://lendify-ai-api.netlify.app/.netlify/functions/api',
   },
-  trailingSlash: true,
+  trailingSlash: false,
   distDir: 'out',
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   webpack: (config) => {

@@ -8,6 +8,16 @@
   NEXT_TELEMETRY_DISABLED = "1"
 
 [[redirects]]
+  from = "/chat"
+  to = "/chat.html"
+  status = 200
+
+[[redirects]]
+  from = "/chat/*"
+  to = "/chat.html"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
@@ -19,7 +29,7 @@
     Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Methods = "GET, POST, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type, Authorization"
-    Cache-Control = "public, max-age=0, must-revalidate"
+    Cache-Control = "no-cache"
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"

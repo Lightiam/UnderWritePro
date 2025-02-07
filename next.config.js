@@ -10,13 +10,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-  trailingSlash: true,
-  exportPathMap: async function() {
-    return {
-      '/': { page: '/' },
-      '/chat': { page: '/chat' }
-    }
-  }
+  trailingSlash: true
 }
 
 module.exports = nextConfig

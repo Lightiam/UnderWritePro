@@ -1,6 +1,8 @@
 export async function generateStaticParams() {
   return [
-    { path: '/' },
-    { path: '/chat' }
+    { path: [''] },
+    { path: ['chat'] }
   ]
 }
+
+export const dynamicParams = false

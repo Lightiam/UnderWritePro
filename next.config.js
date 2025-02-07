@@ -10,7 +10,11 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-  trailingSlash: true
+  trailingSlash: true,
+  distDir: 'out',
+  experimental: {
+    appDir: true
+  }
 }
 
 module.exports = nextConfig

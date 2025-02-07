@@ -1,13 +1,12 @@
+"use client"
+
 import * as React from 'react'
 import { Chat } from '@/components/ui/chat-new'
 import { ErrorBoundary } from '@/components/ui/error-boundary'
 import { APP_NAME } from '@/lib/utils'
 import Link from 'next/link'
 
-export const dynamic = 'force-static'
-export const revalidate = false
-
-export default async function ChatPage() {
+export default function ChatPage() {
   return (
     <div className="min-h-screen bg-white">
       <header className="py-4 px-6 border-b">

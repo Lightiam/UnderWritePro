@@ -9,10 +9,9 @@ export const metadata = {
   description: 'AI-powered credit scoring and risk assessment platform',
 }
 
-export const dynamic = 'force-static'
-export const revalidate = false
+"use client"
 
-export default async function Home() {
+export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

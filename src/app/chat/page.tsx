@@ -2,9 +2,9 @@
 
 import * as React from 'react'
 import { Chat } from '@/components/ui/chat-new'
+import { ErrorBoundary } from '@/components/ui/error-boundary'
 import { APP_NAME } from '@/lib/utils'
 import Link from 'next/link'
-import { ErrorBoundary } from '@/components/ui/error-boundary'
 
 export default function ChatPage() {
   return (

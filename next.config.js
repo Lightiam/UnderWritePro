@@ -18,10 +18,7 @@ const nextConfig = {
   },
   trailingSlash: true,
   distDir: 'out',
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  experimental: {
-    appDir: true
-  }
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx']
 }
 
 module.exports = nextConfig

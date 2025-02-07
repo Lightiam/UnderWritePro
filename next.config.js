@@ -10,11 +10,14 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-  trailingSlash: true,
   distDir: 'out',
   webpack: (config) => {
     config.resolve.fallback = { fs: false, net: false, tls: false }
     return config
+  },
+  experimental: {
+    appDir: true,
+    typedRoutes: true
   }
 }
 

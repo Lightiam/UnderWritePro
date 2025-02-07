@@ -12,12 +12,8 @@ const nextConfig = {
     ignoreBuildErrors: true
   },
   distDir: 'out',
-  generateStaticParams: async () => {
-    return [
-      { slug: [''] },
-      { slug: ['chat'] }
-    ]
-  }
+  reactStrictMode: true,
+  swcMinify: true
 }
 
 module.exports = nextConfig

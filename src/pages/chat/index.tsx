@@ -64,17 +64,14 @@ export default function ChatPage() {
           <h2 className="text-3xl font-semibold text-gray-800 mb-4">Credit Analysis Assistant</h2>
           <p className="text-lg text-gray-600 mb-8">Get instant insights about credit scoring and risk assessment.</p>
           <ul className="mt-6 space-y-4">
-            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors">
-              <i className="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
-              <span className="text-gray-700">Analyzing credit applications and data</span>
+            <li className="border p-4 mb-2 rounded">
+              <i className="fas fa-check-circle text-green-500"></i> Analyzing credit applications and data
             </li>
-            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors">
-              <i className="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
-              <span className="text-gray-700">Providing detailed risk assessments</span>
+            <li className="border p-4 mb-2 rounded">
+              <i className="fas fa-check-circle text-green-500"></i> Providing detailed risk assessments
             </li>
-            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors">
-              <i className="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
-              <span className="text-gray-700">Explaining credit decisions</span>
+            <li className="border p-4 mb-2 rounded">
+              <i className="fas fa-check-circle text-green-500"></i> Explaining credit decisions
             </li>
           </ul>
           <div className="mt-10">

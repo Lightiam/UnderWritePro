@@ -57,37 +57,37 @@ export default function ChatPage() {
       <Head>
         <title>UnderwritePro AI</title>
       </Head>
-      <div className="container mx-auto px-6 py-10">
-        <h1 className="text-3xl font-bold text-center mb-6">UnderwritePro AI</h1>
-        <div className="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">Credit Analysis Assistant</h2>
-          <p className="mt-2 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
-          <ul className="mt-5 space-y-4">
-            <li className="flex items-start p-5 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors mb-3">
-              <svg className="w-6 h-6 text-green-500 mr-4 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+      <div className="container mx-auto px-6 py-12">
+        <h1 className="text-4xl font-bold text-center mb-8">UnderwritePro AI</h1>
+        <div className="bg-white shadow-lg rounded-xl p-8 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-semibold text-gray-800 mb-4">Credit Analysis Assistant</h2>
+          <p className="text-lg text-gray-600 mb-8">Get instant insights about credit scoring and risk assessment.</p>
+          <ul className="mt-6 space-y-5">
+            <li className="flex items-start p-6 border-2 border-gray-100 rounded-xl bg-white hover:bg-gray-50 transition-colors shadow-sm">
+              <svg className="w-7 h-7 text-green-600 mr-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              <div className="space-y-1">
-                <h3 className="text-gray-800 font-medium text-lg">Analyzing Credit Data</h3>
-                <p className="text-gray-600">Process applications and evaluate financial information for accurate credit scoring</p>
+              <div className="space-y-2">
+                <h3 className="text-gray-900 font-semibold text-lg">Analyzing Credit Data</h3>
+                <p className="text-gray-600 text-base leading-relaxed">Process applications and evaluate financial information for accurate credit scoring</p>
               </div>
             </li>
-            <li className="flex items-start p-5 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors mb-3">
-              <svg className="w-6 h-6 text-green-500 mr-4 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+            <li className="flex items-start p-6 border-2 border-gray-100 rounded-xl bg-white hover:bg-gray-50 transition-colors shadow-sm">
+              <svg className="w-7 h-7 text-green-600 mr-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              <div className="space-y-1">
-                <h3 className="text-gray-800 font-medium text-lg">Risk Assessment</h3>
-                <p className="text-gray-600">Generate comprehensive risk profiles using advanced AI analysis</p>
+              <div className="space-y-2">
+                <h3 className="text-gray-900 font-semibold text-lg">Risk Assessment</h3>
+                <p className="text-gray-600 text-base leading-relaxed">Generate comprehensive risk profiles using advanced AI analysis</p>
               </div>
             </li>
-            <li className="flex items-start p-5 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors mb-3">
-              <svg className="w-6 h-6 text-green-500 mr-4 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
+            <li className="flex items-start p-6 border-2 border-gray-100 rounded-xl bg-white hover:bg-gray-50 transition-colors shadow-sm">
+              <svg className="w-7 h-7 text-green-600 mr-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              <div className="space-y-1">
-                <h3 className="text-gray-800 font-medium text-lg">Decision Explanation</h3>
-                <p className="text-gray-600">Provide clear, detailed explanations for credit decisions and recommendations</p>
+              <div className="space-y-2">
+                <h3 className="text-gray-900 font-semibold text-lg">Decision Explanation</h3>
+                <p className="text-gray-600 text-base leading-relaxed">Provide clear, detailed explanations for credit decisions and recommendations</p>
               </div>
             </li>
           </ul>

@@ -68,72 +68,65 @@ export function Chat() {
   }
 
   return (
-    <div className="flex flex-col h-[600px] bg-white rounded-lg shadow-lg">
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+    <div>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Ask about credit scoring or upload a CSV file for analysis..."
+        className="border w-full p-3 rounded mb-4"
+      />
+      <div className="flex justify-between items-center">
+        <input
+          type="file"
+          ref={fileInputRef}
+          className="hidden"
+          accept=".csv,.pdf,.doc,.docx"
+        />
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => fileInputRef.current?.click()}
+          className="text-gray-600 hover:text-gray-800"
+        >
+          <Paperclip className="h-4 w-4 mr-2" />
+          Upload File
+        </Button>
+        <Button 
+          onClick={handleSubmit}
+          disabled={isLoading}
+          className="bg-blue-500 text-white hover:bg-blue-600"
+        >
+          {isLoading ? 'Sending...' : 'Send'}
+          <Send className="h-4 w-4 ml-2" />
+        </Button>
+      </div>
+      <div className="mt-4 space-y-4">
         {messages.map((message, index) => (
           <div
             key={index}
-            className={cn("flex", message.role === 'user' ? 'justify-end' : 'justify-start')}
+            className={cn(
+              "p-3 rounded-lg",
+              message.role === 'user'
+                ? 'bg-blue-500 text-white ml-auto'
+                : 'bg-gray-100 text-gray-900'
+            )}
+            style={{ maxWidth: '80%' }}
           >
-            <div
-              className={cn(
-                "max-w-[80%] rounded-lg px-4 py-2 shadow-sm",
-                message.role === 'user'
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-gray-100 text-gray-900'
-              )}
-            >
-              {message.content}
-            </div>
+            {message.content}
           </div>
         ))}
         {isLoading && (
-          <div className="flex justify-start">
-            <div className="bg-gray-100 rounded-lg px-4 py-2 text-gray-900 shadow-sm">
-              <div className="flex space-x-2">
-                <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce" />
-                <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce [animation-delay:0.2s]" />
-                <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce [animation-delay:0.4s]" />
-              </div>
+          <div className="bg-gray-100 text-gray-900 p-3 rounded-lg" style={{ maxWidth: '80%' }}>
+            <div className="flex space-x-2">
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" />
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce [animation-delay:0.2s]" />
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce [animation-delay:0.4s]" />
             </div>
           </div>
         )}
         <div ref={messagesEndRef} />
       </div>
-      <form onSubmit={handleSubmit} className="p-4 border-t bg-white">
-        <div className="flex space-x-4">
-          <input
-            type="file"
-            ref={fileInputRef}
-            className="hidden"
-            accept=".csv,.pdf,.doc,.docx"
-          />
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            onClick={() => fileInputRef.current?.click()}
-            className="hover:bg-purple-50"
-          >
-            <Paperclip className="h-4 w-4" />
-          </Button>
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message..."
-            className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-400"
-          />
-          <Button 
-            type="submit" 
-            size="icon" 
-            disabled={isLoading}
-            className="bg-purple-600 hover:bg-purple-700"
-          >
-            <Send className="h-4 w-4" />
-          </Button>
-        </div>
-      </form>
     </div>
   )
 }

@@ -9,23 +9,9 @@
 
 [[redirects]]
   from = "/*"
-  to = "/404.html"
-  status = 404
-
-[[redirects]]
-  from = "/"
   to = "/index.html"
   status = 200
-
-[[redirects]]
-  from = "/chat"
-  to = "/chat/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/chat/"
-  to = "/chat/index.html"
-  status = 200
+  force = true
 
 [[headers]]
   for = "/*"
@@ -33,4 +19,4 @@
     Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Methods = "GET, POST, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type, Authorization"
-    Cache-Control = "no-cache"
+    Cache-Control = "public, max-age=0, must-revalidate"

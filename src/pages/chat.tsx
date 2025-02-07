@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { APP_NAME } from '@/lib/utils'
+import { APP_NAME } from '../lib/utils'
 import Link from 'next/link'
-import { Chat } from '@/components/ui/chat-new'
-import { ErrorBoundary } from '@/components/ui/error-boundary'
+import { Chat } from '../components/ui/chat-new'
+import { ErrorBoundary } from '../components/ui/error-boundary'
 
 export default function ChatPage() {
   return (

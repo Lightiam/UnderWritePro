@@ -1,8 +1,8 @@
 import * as React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { APP_NAME } from '@/lib/utils'
+import { Button } from '../components/ui/button'
+import { APP_NAME } from '../lib/utils'
 
 export default function Home() {
   return (

@@ -112,7 +112,7 @@ export default function ChatPage() {
                   </button>
                   <button
                     type="submit"
-                    className="p-2.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center shadow-sm"
+                    className="p-2.5 bg-[#7C3AED] text-white rounded-lg hover:bg-[#6D28D9] transition-colors flex items-center shadow-sm"
                     disabled={isLoading}
                   >
                     <i className="fas fa-paper-plane text-lg"></i>

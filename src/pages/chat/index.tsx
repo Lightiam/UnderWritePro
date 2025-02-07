@@ -84,38 +84,39 @@ export default function ChatPage() {
           </ul>
           <div className="mt-6">
             <form onSubmit={handleSubmit} className="relative">
-              <input
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Ask about credit scoring or upload a CSV file for analysis..."
-                className="w-full p-4 pr-32 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                disabled={isLoading}
-              />
-              <div className="absolute right-2 top-1/2 -translate-y-1/2 flex space-x-2">
+              <div className="relative">
                 <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleFileChange}
-                  accept=".csv,.pdf,.doc,.docx"
-                  className="hidden"
+                  type="text"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Ask about credit scoring or upload a CSV file for analysis..."
+                  className="w-full p-4 pr-24 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   disabled={isLoading}
                 />
-                <button
-                  type="button"
-                  onClick={() => fileInputRef.current?.click()}
-                  className="p-2 text-gray-500 hover:text-gray-700 transition-colors"
-                  disabled={isLoading}
-                >
-                  <i className="fas fa-paperclip text-xl"></i>
-                </button>
-                <button
-                  type="submit"
-                  className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-                  disabled={isLoading}
-                >
-                  <i className="fas fa-paper-plane text-xl"></i>
-                </button>
+                <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    onChange={handleFileChange}
+                    accept=".csv,.pdf,.doc,.docx"
+                    className="hidden"
+                    disabled={isLoading}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                    disabled={isLoading}
+                  >
+                    <i className="fas fa-paperclip"></i>
+                  </button>
+                  <button
+                    type="submit"
+                    className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center"
+                    disabled={isLoading}
+                  >
+                    <i className="fas fa-paper-plane"></i>
+                  </button>
               </div>
             </form>
             {error && (
@@ -123,8 +124,8 @@ export default function ChatPage() {
             )}
           </div>
         </div>
-        <div className="text-center mt-6">
-          <Link href="/" className="inline-flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+        <div className="text-center mt-5">
+          <Link href="/" className="bg-blue-500 text-white rounded-lg px-4 py-2 font-semibold hover:bg-blue-600 transition-colors inline-flex items-center">
             <i className="fas fa-home mr-2"></i>
             Dashboard
           </Link>

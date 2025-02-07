@@ -68,41 +68,41 @@ export default function ChatPage() {
             </li>
           </ul>
           <div className="mt-5">
-            <input
-              type="text"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Ask about credit scoring or upload a CSV file for analysis..."
-              className="border w-full p-3 rounded"
-            />
-            <div className="flex justify-between mt-3">
+            <div className="relative">
               <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleFileUpload}
-                accept=".csv,.pdf,.doc,.docx"
-                className="hidden"
+                type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Ask about credit scoring or upload a CSV file for analysis..."
+                className="w-full p-4 pr-32 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               />
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="text-gray-600 hover:text-gray-800"
-              >
-                <FontAwesomeIcon icon={faPaperclip} className="mr-2" />
-                Upload File
-              </button>
-              <button
-                onClick={handleSubmit}
-                className="bg-blue-500 text-white rounded-lg px-4 py-2 font-semibold hover:bg-blue-600"
-              >
-                <FontAwesomeIcon icon={faPaperPlane} className="mr-2" />
-                Send
-              </button>
+              <div className="absolute right-2 top-2 flex space-x-2">
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileUpload}
+                  accept=".csv,.pdf,.doc,.docx"
+                  className="hidden"
+                />
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="p-2 text-gray-500 hover:text-gray-700 transition-colors"
+                >
+                  <FontAwesomeIcon icon={faPaperclip} className="text-xl" />
+                </button>
+                <button
+                  onClick={handleSubmit}
+                  className="p-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                >
+                  <FontAwesomeIcon icon={faPaperPlane} className="text-xl" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <div className="text-center mt-5">
-          <Link href="/" className="bg-blue-500 text-white rounded-lg px-4 py-2 font-semibold hover:bg-blue-600">
+        <div className="text-center mt-6">
+          <Link href="/" className="inline-flex items-center px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">
             <FontAwesomeIcon icon={faHome} className="mr-2" />
             Dashboard
           </Link>

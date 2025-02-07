@@ -11,9 +11,14 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-  distDir: 'out',
-  reactStrictMode: true,
-  swcMinify: true
+  experimental: {
+    appDir: true,
+    serverActions: false
+  },
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false, path: false }
+    return config
+  }
 }
 
 module.exports = nextConfig

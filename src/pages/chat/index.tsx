@@ -65,29 +65,29 @@ export default function ChatPage() {
     <div className="min-h-screen bg-gray-100">
       <Head>
         <title>UnderwritePro AI</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
       </Head>
-      <div className="container mx-auto px-6 py-12">
-        <h1 className="text-4xl font-bold text-center mb-8">UnderwritePro AI</h1>
-        <div className="bg-white shadow-lg rounded-xl p-8 max-w-2xl mx-auto">
-          <h2 className="text-2xl font-semibold">Credit Analysis Assistant</h2>
-          <p className="mt-3">Get instant insights about credit scoring and risk assessment.</p>
-          <ul className="mt-5 feature-list">
-            <li>
-              <i className="fas fa-check-circle text-green-500"></i>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold text-center mb-6">UnderwritePro AI</h1>
+        <div className="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-semibold text-gray-800">Credit Analysis Assistant</h2>
+          <p className="mt-3 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
+          <ul className="mt-6 space-y-3">
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white hover:shadow-md transition-shadow">
+              <i className="fas fa-check-circle text-green-500 text-xl mr-3"></i>
               <span className="text-gray-700">Analyzing credit applications and data</span>
             </li>
-            <li>
-              <i className="fas fa-check-circle text-green-500"></i>
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white hover:shadow-md transition-shadow">
+              <i className="fas fa-check-circle text-green-500 text-xl mr-3"></i>
               <span className="text-gray-700">Providing detailed risk assessments</span>
             </li>
-            <li>
-              <i className="fas fa-check-circle text-green-500"></i>
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white hover:shadow-md transition-shadow">
+              <i className="fas fa-check-circle text-green-500 text-xl mr-3"></i>
               <span className="text-gray-700">Explaining credit decisions</span>
             </li>
           </ul>
-          <div className="mt-10">
+          <div className="mt-8">
             <div className="mb-6 space-y-4 max-h-[500px] overflow-y-auto">
               {messages.map((msg, index) => (
                 <div
@@ -95,10 +95,10 @@ export default function ChatPage() {
                   className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] p-4 rounded-lg shadow-sm ${
+                    className={`max-w-[80%] p-4 rounded-lg ${
                       msg.type === 'user'
-                        ? 'bg-blue-500 text-white'
-                        : 'bg-white border border-gray-200 text-gray-900'
+                        ? 'bg-purple-600 text-white shadow-md'
+                        : 'bg-white border border-gray-200 text-gray-800 shadow-sm'
                     }`}
                   >
                     {msg.content}
@@ -109,9 +109,9 @@ export default function ChatPage() {
                 <div className="flex justify-start">
                   <div className="max-w-[80%] p-4 rounded-lg bg-white border border-gray-200">
                     <div className="flex space-x-2">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" />
-                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce [animation-delay:0.2s]" />
-                      <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce [animation-delay:0.4s]" />
+                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" />
+                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce [animation-delay:0.2s]" />
+                      <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce [animation-delay:0.4s]" />
                     </div>
                   </div>
                 </div>
@@ -125,7 +125,7 @@ export default function ChatPage() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Ask about credit scoring or upload a CSV file for analysis..."
-                  className="w-full p-4 pr-32 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 bg-white shadow-sm text-base transition-colors placeholder-gray-500"
+                  className="w-full p-4 pr-32 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-700 bg-white shadow-sm text-base transition-colors placeholder-gray-500"
                   disabled={isLoading}
                 />
                 <div className="absolute right-2 top-2 flex space-x-2">
@@ -140,21 +140,19 @@ export default function ChatPage() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="p-2.5 text-gray-500 hover:text-gray-700 transition-colors rounded-lg hover:bg-gray-100 flex items-center"
+                    className="p-2.5 text-gray-600 hover:text-gray-800 transition-colors rounded-lg hover:bg-gray-100 flex items-center"
                     disabled={isLoading}
                     aria-label="Upload file"
                   >
-                    <i className="fas fa-paperclip text-lg mr-2"></i>
-                    <span>Upload</span>
+                    <i className="fas fa-paperclip text-lg"></i>
                   </button>
                   <button
                     type="submit"
-                    className="p-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center shadow-sm"
+                    className="p-2.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center shadow-sm"
                     disabled={isLoading}
                     aria-label="Send message"
                   >
-                    <i className="fas fa-paper-plane text-lg mr-2"></i>
-                    <span>{isLoading ? 'Sending...' : 'Send'}</span>
+                    <i className="fas fa-paper-plane text-lg"></i>
                   </button>
                 </div>
               </div>

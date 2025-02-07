@@ -99,17 +99,17 @@ export default function ChatPage() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="p-2.5 text-gray-400 hover:text-gray-600 transition-colors rounded-lg hover:bg-gray-50"
+                    className="p-2.5 text-gray-500 hover:text-gray-700 transition-colors rounded-lg hover:bg-gray-50"
                     disabled={isLoading}
                   >
-                    <i className="fas fa-paperclip text-lg"></i>
+                    <i className="fas fa-paperclip text-xl"></i>
                   </button>
                   <button
                     type="submit"
                     className="p-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center shadow-sm"
                     disabled={isLoading}
                   >
-                    <i className="fas fa-paper-plane text-lg"></i>
+                    <i className="fas fa-paper-plane text-xl"></i>
                   </button>
                 </div>
               </div>

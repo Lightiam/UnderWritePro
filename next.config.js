@@ -22,12 +22,10 @@ const nextConfig = {
     return config
   },
   trailingSlash: true,
-  exportPathMap: async function() {
-    return {
-      '/': { page: '/' },
-      '/chat': { page: '/chat' }
-    }
-  }
+  basePath: '',
+  assetPrefix: '',
+  skipTrailingSlashRedirect: true,
+  skipMiddlewareUrlNormalize: true
 }
 
 module.exports = nextConfig

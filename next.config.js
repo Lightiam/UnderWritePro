@@ -11,13 +11,10 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-  experimental: {
-    appDir: true,
-    serverActions: false
-  },
-  webpack: (config) => {
-    config.resolve.fallback = { fs: false, path: false }
-    return config
+  distDir: 'out',
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  generateBuildId: async () => {
+    return 'build'
   }
 }
 

@@ -11,6 +11,7 @@ export const metadata = {
 
 export const dynamic = 'force-static'
 export const revalidate = false
+export const generateStaticParams = async () => []
 
 export default function Home() {
   return (

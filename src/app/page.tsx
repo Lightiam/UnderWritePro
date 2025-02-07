@@ -9,8 +9,6 @@ export const metadata = {
   description: 'AI-powered credit scoring and risk assessment platform',
 }
 
-"use client"
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white">

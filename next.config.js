@@ -12,9 +12,8 @@ const nextConfig = {
   },
   trailingSlash: true,
   distDir: 'out',
-  webpack: (config) => {
-    config.resolve.fallback = { fs: false, path: false }
-    return config
+  experimental: {
+    appDir: true
   }
 }
 

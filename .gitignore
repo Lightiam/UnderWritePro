@@ -6,3 +6,6 @@ dist/
 *.egg-info/
 .env
 .env.local
+
+# Local Netlify folder
+.netlify

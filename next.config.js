@@ -9,6 +9,13 @@ const nextConfig = {
   },
   typescript: {
     ignoreBuildErrors: true
+  },
+  distDir: 'out',
+  trailingSlash: true,
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  experimental: {
+    appDir: true,
+    typedRoutes: true
   }
 }
 

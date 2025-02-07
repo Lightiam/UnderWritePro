@@ -65,19 +65,19 @@ export default function ChatPage() {
       </Head>
       <div className="container mx-auto px-6 py-10">
         <h1 className="text-3xl font-bold text-center mb-6">UnderwritePro AI</h1>
-        <div className="bg-white shadow-lg rounded-xl p-8 max-w-2xl mx-auto">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">Credit Analysis Assistant</h2>
+        <div className="bg-white shadow-lg rounded-xl p-6 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-3">Credit Analysis Assistant</h2>
           <p className="mt-2 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
-          <ul className="mt-6 space-y-4">
-            <li className="border border-gray-200 p-4 rounded-lg flex items-center bg-white shadow-sm">
+          <ul className="mt-5 space-y-3">
+            <li className="border border-gray-200 p-3.5 rounded-lg flex items-center bg-white shadow-sm">
               <i className="fas fa-check-circle text-green-500 mr-3"></i>
               <span className="text-gray-700">Analyzing credit applications and data</span>
             </li>
-            <li className="border border-gray-200 p-4 rounded-lg flex items-center bg-white shadow-sm">
+            <li className="border border-gray-200 p-3.5 rounded-lg flex items-center bg-white shadow-sm">
               <i className="fas fa-check-circle text-green-500 mr-3"></i>
               <span className="text-gray-700">Providing detailed risk assessments</span>
             </li>
-            <li className="border border-gray-200 p-4 rounded-lg flex items-center bg-white shadow-sm">
+            <li className="border border-gray-200 p-3.5 rounded-lg flex items-center bg-white shadow-sm">
               <i className="fas fa-check-circle text-green-500 mr-3"></i>
               <span className="text-gray-700">Explaining credit decisions</span>
             </li>

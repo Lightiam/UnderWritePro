@@ -13,9 +13,8 @@ const nextConfig = {
   },
   distDir: 'out',
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  generateBuildId: async () => {
-    return 'build'
-  }
+  basePath: '',
+  assetPrefix: ''
 }
 
 module.exports = nextConfig

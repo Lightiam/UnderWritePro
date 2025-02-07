@@ -43,38 +43,38 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 font-['Roboto']">
+    <div className="min-h-screen bg-gray-100">
       <Head>
         <title>{APP_NAME} - Credit Analysis</title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
-      <div className="container mx-auto mt-10">
-        <h1 className="text-3xl font-bold text-center">{APP_NAME}</h1>
-        <div className="bg-white shadow-md rounded-lg p-5 mt-5">
-          <h2 className="text-2xl font-semibold">Credit Analysis Assistant</h2>
-          <p className="mt-3">Get instant insights about credit scoring and risk assessment.</p>
-          <ul className="mt-5">
-            <li className="border p-4 mb-2 rounded flex items-center">
-              <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mr-2" /> 
-              Analyzing credit applications and data
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold text-center mb-8">{APP_NAME}</h1>
+        <div className="bg-white shadow-lg rounded-xl p-6 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-semibold text-gray-800">Credit Analysis Assistant</h2>
+          <p className="mt-3 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
+          <ul className="mt-6 space-y-3">
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg">
+              <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mr-3 text-xl" /> 
+              <span className="text-gray-700">Analyzing credit applications and data</span>
             </li>
-            <li className="border p-4 mb-2 rounded flex items-center">
-              <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mr-2" /> 
-              Providing detailed risk assessments
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg">
+              <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mr-3 text-xl" /> 
+              <span className="text-gray-700">Providing detailed risk assessments</span>
             </li>
-            <li className="border p-4 mb-2 rounded flex items-center">
-              <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mr-2" /> 
-              Explaining credit decisions
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg">
+              <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mr-3 text-xl" /> 
+              <span className="text-gray-700">Explaining credit decisions</span>
             </li>
           </ul>
-          <div className="mt-5">
+          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <div className="relative">
               <input
                 type="text"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Ask about credit scoring or upload a CSV file for analysis..."
-                className="w-full p-4 pr-32 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full p-4 pr-32 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent shadow-sm"
               />
               <div className="absolute right-2 top-2 flex space-x-2">
                 <input
@@ -87,19 +87,19 @@ export default function ChatPage() {
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="p-2 text-gray-500 hover:text-gray-700 transition-colors"
+                  className="p-2 text-gray-500 hover:text-gray-700 transition-colors rounded-lg hover:bg-gray-100"
                 >
                   <FontAwesomeIcon icon={faPaperclip} className="text-xl" />
                 </button>
                 <button
-                  onClick={handleSubmit}
-                  className="p-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                  type="submit"
+                  className="p-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors shadow-sm"
                 >
                   <FontAwesomeIcon icon={faPaperPlane} className="text-xl" />
                 </button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
         <div className="text-center mt-6">
           <Link href="/" className="inline-flex items-center px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors">

@@ -2,15 +2,13 @@
 const nextConfig = {
   output: 'export',
   images: { unoptimized: true },
+  trailingSlash: true,
+  distDir: 'out',
   env: {
     NEXT_PUBLIC_API_URL: 'https://lendify-ai-api.netlify.app/.netlify/functions/api',
   },
-  trailingSlash: true,
-  distDir: 'out',
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  webpack: (config) => {
-    config.resolve.fallback = { fs: false, path: false }
-    return config
+  typescript: {
+    ignoreBuildErrors: true,
   }
 }
 

@@ -22,9 +22,11 @@ const nextConfig = {
     return config
   },
   trailingSlash: true,
-  experimental: {
-    appDir: true,
-    serverActions: false
+  generateStaticParams: async () => {
+    return [
+      { path: '/' },
+      { path: '/chat' }
+    ]
   }
 }
 

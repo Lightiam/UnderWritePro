@@ -70,35 +70,35 @@ export default function ChatPage() {
       </Head>
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-center mb-6">UnderwritePro AI</h1>
-        <div className="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto">
+        <div className="bg-white shadow-lg rounded-xl p-8 max-w-2xl mx-auto">
           <h2 className="text-2xl font-semibold text-gray-800">Credit Analysis Assistant</h2>
           <p className="mt-3 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
-          <ul className="mt-6 space-y-3">
-            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white hover:shadow-md transition-shadow">
+          <ul className="mt-6 space-y-4">
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white hover:shadow-md transition-all duration-200">
               <i className="fas fa-check-circle text-green-500 text-xl mr-3"></i>
               <span className="text-gray-700">Analyzing credit applications and data</span>
             </li>
-            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white hover:shadow-md transition-shadow">
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white hover:shadow-md transition-all duration-200">
               <i className="fas fa-check-circle text-green-500 text-xl mr-3"></i>
               <span className="text-gray-700">Providing detailed risk assessments</span>
             </li>
-            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white hover:shadow-md transition-shadow">
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white hover:shadow-md transition-all duration-200">
               <i className="fas fa-check-circle text-green-500 text-xl mr-3"></i>
               <span className="text-gray-700">Explaining credit decisions</span>
             </li>
           </ul>
           <div className="mt-8">
-            <div className="mb-6 space-y-4 max-h-[500px] overflow-y-auto">
+            <div className="mb-6 space-y-4 max-h-[500px] overflow-y-auto relative">
               {messages.map((msg, index) => (
                 <div
                   key={index}
                   className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] p-4 rounded-lg ${
+                    className={`max-w-[80%] p-4 rounded-xl ${
                       msg.type === 'user'
-                        ? 'bg-purple-600 text-white shadow-md'
-                        : 'bg-white border border-gray-200 text-gray-800 shadow-sm'
+                        ? 'bg-purple-600 text-white shadow-lg hover:shadow-xl transition-shadow'
+                        : 'bg-white border border-gray-200 text-gray-800 shadow hover:shadow-md transition-shadow'
                     }`}
                   >
                     {msg.content}
@@ -125,7 +125,7 @@ export default function ChatPage() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Ask about credit scoring or upload a CSV file for analysis..."
-                  className="w-full p-4 pr-32 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-700 bg-white shadow-sm text-base transition-colors placeholder-gray-500"
+                  className="w-full p-4 pr-32 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-700 bg-white shadow-md text-base transition-all duration-200 placeholder-gray-500 hover:shadow-lg"
                   disabled={isLoading}
                 />
                 <div className="absolute right-2 top-2 flex space-x-2">
@@ -140,7 +140,7 @@ export default function ChatPage() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="p-2.5 text-gray-600 hover:text-gray-800 transition-colors rounded-lg hover:bg-gray-100 flex items-center"
+                    className="p-3 text-gray-600 hover:text-purple-600 transition-all duration-200 rounded-xl hover:bg-purple-50 flex items-center"
                     disabled={isLoading}
                     aria-label="Upload file"
                   >
@@ -148,7 +148,7 @@ export default function ChatPage() {
                   </button>
                   <button
                     type="submit"
-                    className="p-2.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center shadow-sm"
+                    className="p-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 flex items-center shadow-md hover:shadow-lg"
                     disabled={isLoading}
                     aria-label="Send message"
                   >

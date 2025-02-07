@@ -10,10 +10,12 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-  distDir: 'out',
   trailingSlash: true,
-  experimental: {
-    typedRoutes: true
+  exportPathMap: async function() {
+    return {
+      '/': { page: '/' },
+      '/chat': { page: '/chat' }
+    }
   }
 }
 

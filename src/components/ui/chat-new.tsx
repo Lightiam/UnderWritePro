@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Button } from './button'
-import { PaperClipIcon, SendIcon } from 'lucide-react'
+import { Paperclip, Send } from 'lucide-react'
 import { cn } from '../../lib/utils'
 
 interface Message {
@@ -115,7 +115,7 @@ export function Chat() {
             onClick={() => fileInputRef.current?.click()}
             className="hover:bg-purple-50"
           >
-            <PaperClipIcon className="h-4 w-4" />
+            <Paperclip className="h-4 w-4" />
           </Button>
           <input
             type="text"
@@ -130,7 +130,7 @@ export function Chat() {
             disabled={isLoading}
             className="bg-purple-600 hover:bg-purple-700"
           >
-            <SendIcon className="h-4 w-4" />
+            <Send className="h-4 w-4" />
           </Button>
         </div>
       </form>

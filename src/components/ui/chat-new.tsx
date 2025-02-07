@@ -10,8 +10,13 @@ interface Message {
   content: string
 }
 
+const WELCOME_MESSAGE = {
+  role: 'assistant' as const,
+  content: 'Hello! I\'m your AI credit scoring assistant. I can help you understand credit profiles, analyze loan applications, and provide risk assessments. How can I assist you today?'
+}
+
 export function Chat() {
-  const [messages, setMessages] = React.useState<Message[]>([])
+  const [messages, setMessages] = React.useState<Message[]>([WELCOME_MESSAGE])
   const [input, setInput] = React.useState('')
   const [isLoading, setIsLoading] = React.useState(false)
   const messagesEndRef = React.useRef<HTMLDivElement>(null)

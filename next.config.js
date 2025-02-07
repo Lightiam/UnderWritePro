@@ -12,9 +12,9 @@ const nextConfig = {
   },
   trailingSlash: true,
   distDir: 'out',
-  experimental: {
-    appDir: true
-  }
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  basePath: '',
+  assetPrefix: ''
 }
 
 module.exports = nextConfig

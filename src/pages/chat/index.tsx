@@ -89,6 +89,7 @@ export default function ChatPage() {
           </ul>
           <div className="mt-8">
             <div className="mb-6 space-y-4 max-h-[500px] overflow-y-auto relative">
+              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white to-transparent pointer-events-none z-10"></div>
               {messages.map((msg, index) => (
                 <div
                   key={index}

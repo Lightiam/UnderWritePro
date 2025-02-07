@@ -43,26 +43,26 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white font-['Roboto']">
+    <div className="min-h-screen bg-gray-100 font-['Roboto']">
       <Head>
         <title>{APP_NAME} - Credit Analysis</title>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mb-8">{APP_NAME}</h1>
+      <div className="container mx-auto mt-10">
+        <h1 className="text-3xl font-bold text-center">{APP_NAME}</h1>
         <div className="bg-white shadow-md rounded-lg p-5 mt-5">
           <h2 className="text-2xl font-semibold">Credit Analysis Assistant</h2>
           <p className="mt-3">Get instant insights about credit scoring and risk assessment.</p>
           <ul className="mt-5">
-            <li className="border p-4 mb-2 rounded">
+            <li className="border p-4 mb-2 rounded flex items-center">
               <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mr-2" /> 
               Analyzing credit applications and data
             </li>
-            <li className="border p-4 mb-2 rounded">
+            <li className="border p-4 mb-2 rounded flex items-center">
               <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mr-2" /> 
               Providing detailed risk assessments
             </li>
-            <li className="border p-4 mb-2 rounded">
+            <li className="border p-4 mb-2 rounded flex items-center">
               <FontAwesomeIcon icon={faCheckCircle} className="text-green-500 mr-2" /> 
               Explaining credit decisions
             </li>

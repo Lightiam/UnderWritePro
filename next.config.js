@@ -17,7 +17,11 @@ const nextConfig = {
     ignoreBuildErrors: true
   },
   trailingSlash: true,
-  distDir: 'out'
+  distDir: 'out',
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  basePath: '',
+  assetPrefix: '',
+  generateBuildId: () => 'build'
 }
 
 module.exports = nextConfig

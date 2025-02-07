@@ -32,7 +32,10 @@ export default function ChatPage() {
 
     setIsLoading(true)
     const formData = new FormData()
-    if (message) formData.append('message', message)
+    if (message) {
+      formData.append('message', message)
+      setMessages(prev => [...prev, { type: 'user', content: message }])
+    }
     if (fileInputRef.current?.files?.length) {
       formData.append('file', fileInputRef.current.files[0])
     }
@@ -43,11 +46,14 @@ export default function ChatPage() {
         body: formData,
       })
       if (!response.ok) throw new Error('Failed to send message')
+      const data = await response.json()
+      setMessages(prev => [...prev, { type: 'assistant', content: data.response }])
       setMessage('')
       if (fileInputRef.current) fileInputRef.current.value = ''
     } catch (error) {
       console.error('Error:', error)
       setError('Failed to send message. Please try again.')
+      setMessages(prev => [...prev, { type: 'assistant', content: 'Sorry, I encountered an error. Please try again.' }])
     } finally {
       setIsLoading(false)
     }

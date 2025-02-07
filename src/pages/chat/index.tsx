@@ -70,16 +70,16 @@ export default function ChatPage() {
           <h2 className="text-2xl font-semibold">Credit Analysis Assistant</h2>
           <p className="mt-3">Get instant insights about credit scoring and risk assessment.</p>
           <ul className="mt-5 space-y-3">
-            <li className="flex items-center p-4 border border-gray-200 rounded-lg">
-              <i className="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
+              <i className="fas fa-chart-line text-blue-500 mr-3 text-xl"></i>
               <span className="text-gray-700">Analyzing credit applications and data</span>
             </li>
-            <li className="flex items-center p-4 border border-gray-200 rounded-lg">
-              <i className="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
+              <i className="fas fa-shield-alt text-blue-500 mr-3 text-xl"></i>
               <span className="text-gray-700">Providing detailed risk assessments</span>
             </li>
-            <li className="flex items-center p-4 border border-gray-200 rounded-lg">
-              <i className="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
+              <i className="fas fa-comments text-blue-500 mr-3 text-xl"></i>
               <span className="text-gray-700">Explaining credit decisions</span>
             </li>
           </ul>
@@ -135,11 +135,12 @@ export default function ChatPage() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="p-2.5 text-gray-500 hover:text-gray-700 transition-colors rounded-lg hover:bg-gray-100"
+                    className="p-2.5 text-gray-500 hover:text-gray-700 transition-colors rounded-lg hover:bg-gray-100 flex items-center"
                     disabled={isLoading}
                     aria-label="Upload file"
                   >
-                    <i className="fas fa-paperclip text-lg"></i>
+                    <i className="fas fa-paperclip text-lg mr-2"></i>
+                    <span>Upload</span>
                   </button>
                   <button
                     type="submit"
@@ -147,7 +148,8 @@ export default function ChatPage() {
                     disabled={isLoading}
                     aria-label="Send message"
                   >
-                    <i className="fas fa-paper-plane text-lg"></i>
+                    <i className="fas fa-paper-plane text-lg mr-2"></i>
+                    <span>{isLoading ? 'Sending...' : 'Send'}</span>
                   </button>
                 </div>
               </div>

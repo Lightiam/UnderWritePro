@@ -57,23 +57,23 @@ export default function ChatPage() {
       <Head>
         <title>UnderwritePro AI</title>
       </Head>
-      <div className="container mx-auto px-6 py-10">
-        <h1 className="text-3xl font-bold text-center mb-6">UnderwritePro AI</h1>
-        <div className="bg-white shadow-lg rounded-xl p-6 max-w-2xl mx-auto">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-3">Credit Analysis Assistant</h2>
-          <p className="mt-2 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
-          <ul className="mt-5 space-y-3">
-            <li className="border border-gray-100 p-3 rounded-lg flex items-center bg-white">
-              <i className="fas fa-check-circle text-green-500 mr-3"></i>
-              <span className="text-gray-600">Analyzing credit applications and data</span>
+      <div className="container mx-auto px-8 py-12">
+        <h1 className="text-3xl font-bold text-center mb-8">UnderwritePro AI</h1>
+        <div className="bg-white shadow-lg rounded-xl p-8 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Credit Analysis Assistant</h2>
+          <p className="mt-3 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
+          <ul className="mt-6 space-y-4">
+            <li className="border border-gray-200 p-4 rounded-lg flex items-center bg-white shadow-sm">
+              <i className="fas fa-check-circle text-green-500 mr-3 text-lg"></i>
+              <span className="text-gray-700">Analyzing credit applications and data</span>
             </li>
-            <li className="border border-gray-100 p-3 rounded-lg flex items-center bg-white">
-              <i className="fas fa-check-circle text-green-500 mr-3"></i>
-              <span className="text-gray-600">Providing detailed risk assessments</span>
+            <li className="border border-gray-200 p-4 rounded-lg flex items-center bg-white shadow-sm">
+              <i className="fas fa-check-circle text-green-500 mr-3 text-lg"></i>
+              <span className="text-gray-700">Providing detailed risk assessments</span>
             </li>
-            <li className="border border-gray-100 p-3 rounded-lg flex items-center bg-white">
-              <i className="fas fa-check-circle text-green-500 mr-3"></i>
-              <span className="text-gray-600">Explaining credit decisions</span>
+            <li className="border border-gray-200 p-4 rounded-lg flex items-center bg-white shadow-sm">
+              <i className="fas fa-check-circle text-green-500 mr-3 text-lg"></i>
+              <span className="text-gray-700">Explaining credit decisions</span>
             </li>
           </ul>
           <div className="mt-6">
@@ -106,7 +106,7 @@ export default function ChatPage() {
                   </button>
                   <button
                     type="submit"
-                    className="p-2.5 bg-[#7C3AED] text-white rounded-lg hover:bg-[#6D28D9] transition-colors flex items-center shadow-sm"
+                    className="p-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center shadow-sm"
                     disabled={isLoading}
                   >
                     <i className="fas fa-paper-plane text-lg"></i>
@@ -120,7 +120,7 @@ export default function ChatPage() {
           </div>
         </div>
         <div className="text-center mt-6">
-          <Link href="/" className="inline-flex items-center px-6 py-3 bg-[#7C3AED] text-white rounded-lg hover:bg-[#6D28D9] transition-colors shadow-sm">
+          <Link href="/" className="inline-flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
             <i className="fas fa-home mr-2"></i>
             Dashboard
           </Link>

@@ -63,31 +63,31 @@ export default function ChatPage() {
           <h2 className="text-2xl font-semibold text-gray-800 mb-3">Credit Analysis Assistant</h2>
           <p className="mt-2 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
           <ul className="mt-5 space-y-4">
-            <li className="flex items-start p-4 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors">
-              <svg className="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <li className="flex items-start p-5 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors mb-3">
+              <svg className="w-6 h-6 text-green-500 mr-4 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              <div>
-                <span className="text-gray-700 font-medium">Analyzing Credit Data</span>
-                <p className="text-sm text-gray-500 mt-1">Process applications and evaluate financial information for accurate credit scoring</p>
+              <div className="space-y-1">
+                <h3 className="text-gray-800 font-medium text-lg">Analyzing Credit Data</h3>
+                <p className="text-gray-600">Process applications and evaluate financial information for accurate credit scoring</p>
               </div>
             </li>
-            <li className="flex items-start p-4 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors">
-              <svg className="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <li className="flex items-start p-5 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors mb-3">
+              <svg className="w-6 h-6 text-green-500 mr-4 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              <div>
-                <span className="text-gray-700 font-medium">Risk Assessment</span>
-                <p className="text-sm text-gray-500 mt-1">Generate comprehensive risk profiles using advanced AI analysis</p>
+              <div className="space-y-1">
+                <h3 className="text-gray-800 font-medium text-lg">Risk Assessment</h3>
+                <p className="text-gray-600">Generate comprehensive risk profiles using advanced AI analysis</p>
               </div>
             </li>
-            <li className="flex items-start p-4 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors">
-              <svg className="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+            <li className="flex items-start p-5 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors mb-3">
+              <svg className="w-6 h-6 text-green-500 mr-4 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              <div>
-                <span className="text-gray-700 font-medium">Decision Explanation</span>
-                <p className="text-sm text-gray-500 mt-1">Provide clear, detailed explanations for credit decisions and recommendations</p>
+              <div className="space-y-1">
+                <h3 className="text-gray-800 font-medium text-lg">Decision Explanation</h3>
+                <p className="text-gray-600">Provide clear, detailed explanations for credit decisions and recommendations</p>
               </div>
             </li>
           </ul>

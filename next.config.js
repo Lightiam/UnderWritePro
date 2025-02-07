@@ -15,7 +15,14 @@ const nextConfig = {
     config.resolve.fallback = { fs: false, net: false, tls: false }
     return config
   },
-  trailingSlash: true
+  trailingSlash: true,
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  exportPathMap: async function () {
+    return {
+      '/': { page: '/' },
+      '/chat': { page: '/chat' }
+    }
+  }
 }
 
 module.exports = nextConfig

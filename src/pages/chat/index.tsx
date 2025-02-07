@@ -117,6 +117,7 @@ export default function ChatPage() {
                   >
                     <i className="fas fa-paper-plane"></i>
                   </button>
+                </div>
               </div>
             </form>
             {error && (

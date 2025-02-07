@@ -15,11 +15,7 @@ const nextConfig = {
     config.resolve.fallback = { fs: false, net: false, tls: false }
     return config
   },
-  trailingSlash: true,
-  experimental: {
-    appDir: true,
-    serverActions: false
-  }
+  trailingSlash: true
 }
 
 module.exports = nextConfig

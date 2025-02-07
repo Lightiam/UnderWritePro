@@ -69,17 +69,17 @@ export default function ChatPage() {
           <h2 className="text-2xl font-semibold text-gray-800 mb-2">Credit Analysis Assistant</h2>
           <p className="mt-2 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
           <ul className="mt-6 space-y-4">
-            <li className="border border-gray-100 p-4 mb-3 rounded-lg flex items-center bg-white">
-              <i className="fas fa-check-circle text-green-500 mr-4"></i>
-              <span className="text-gray-600">Analyzing credit applications and data</span>
+            <li className="border border-gray-200 p-4 rounded-lg flex items-center bg-white shadow-sm">
+              <i className="fas fa-check-circle text-green-500 mr-3"></i>
+              <span className="text-gray-700">Analyzing credit applications and data</span>
             </li>
-            <li className="border border-gray-100 p-4 mb-3 rounded-lg flex items-center bg-white">
-              <i className="fas fa-check-circle text-green-500 mr-4"></i>
-              <span className="text-gray-600">Providing detailed risk assessments</span>
+            <li className="border border-gray-200 p-4 rounded-lg flex items-center bg-white shadow-sm">
+              <i className="fas fa-check-circle text-green-500 mr-3"></i>
+              <span className="text-gray-700">Providing detailed risk assessments</span>
             </li>
-            <li className="border border-gray-100 p-4 mb-3 rounded-lg flex items-center bg-white">
-              <i className="fas fa-check-circle text-green-500 mr-4"></i>
-              <span className="text-gray-600">Explaining credit decisions</span>
+            <li className="border border-gray-200 p-4 rounded-lg flex items-center bg-white shadow-sm">
+              <i className="fas fa-check-circle text-green-500 mr-3"></i>
+              <span className="text-gray-700">Explaining credit decisions</span>
             </li>
           </ul>
           <div className="mt-6">
@@ -90,10 +90,10 @@ export default function ChatPage() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Ask about credit scoring or upload a CSV file for analysis..."
-                  className="w-full p-3 pr-20 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
+                  className="w-full p-4 pr-24 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-700 bg-white shadow-sm"
                   disabled={isLoading}
                 />
-                <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
                   <input
                     type="file"
                     ref={fileInputRef}
@@ -105,14 +105,14 @@ export default function ChatPage() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="p-2 text-gray-500 hover:text-gray-700 transition-colors"
+                    className="p-2.5 text-gray-400 hover:text-gray-600 transition-colors rounded-lg hover:bg-gray-50"
                     disabled={isLoading}
                   >
                     <i className="fas fa-paperclip text-lg"></i>
                   </button>
                   <button
                     type="submit"
-                    className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center"
+                    className="p-2.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center shadow-sm"
                     disabled={isLoading}
                   >
                     <i className="fas fa-paper-plane text-lg"></i>
@@ -125,8 +125,8 @@ export default function ChatPage() {
             )}
           </div>
         </div>
-        <div className="text-center mt-5">
-          <Link href="/" className="bg-blue-500 text-white rounded-lg px-4 py-2 font-semibold hover:bg-blue-600 transition-colors inline-flex items-center">
+        <div className="text-center mt-6">
+          <Link href="/" className="inline-flex items-center px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors shadow-sm">
             <i className="fas fa-home mr-2"></i>
             Dashboard
           </Link>

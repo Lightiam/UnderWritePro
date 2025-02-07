@@ -17,6 +17,14 @@ export default function Document() {
             margin-right: 0.5rem;
             display: inline-flex;
             align-items: center;
+            vertical-align: middle;
+          }
+          .fa-check-circle {
+            color: #10B981;
+            font-size: 1.25rem;
+          }
+          .fa-paperclip, .fa-paper-plane {
+            font-size: 1.125rem;
           }
         `}</style>
       </Head>

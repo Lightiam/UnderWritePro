@@ -19,9 +19,9 @@ const nextConfig = {
   trailingSlash: true,
   distDir: 'out',
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  basePath: '',
-  assetPrefix: '',
-  generateBuildId: () => 'build'
+  experimental: {
+    appDir: true
+  }
 }
 
 module.exports = nextConfig

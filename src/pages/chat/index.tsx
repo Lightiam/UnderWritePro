@@ -6,7 +6,9 @@ export default function ChatPage() {
   const [message, setMessage] = React.useState('')
   const [isLoading, setIsLoading] = React.useState(false)
   const [error, setError] = React.useState('')
-  const [messages, setMessages] = React.useState<Array<{type: 'user' | 'assistant', content: string}>>([])
+  const [messages, setMessages] = React.useState<Array<{type: 'user' | 'assistant', content: string}>>([
+    { type: 'assistant', content: 'Hello! I\'m your AI credit scoring assistant. I can help you understand credit profiles, analyze loan applications, and provide risk assessments. How can I assist you today?' }
+  ])
   const fileInputRef = React.useRef<HTMLInputElement>(null)
   const messagesEndRef = React.useRef<HTMLDivElement>(null)
 
@@ -63,6 +65,8 @@ export default function ChatPage() {
     <div className="min-h-screen bg-gray-100">
       <Head>
         <title>UnderwritePro AI</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
       </Head>
       <div className="container mx-auto px-6 py-12">
         <h1 className="text-4xl font-bold text-center mb-8">UnderwritePro AI</h1>

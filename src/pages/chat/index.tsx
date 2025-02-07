@@ -91,7 +91,7 @@ export default function ChatPage() {
               </div>
             </li>
           </ul>
-          <div className="mt-8">
+          <div className="mt-10">
             <form onSubmit={handleSubmit} className="relative">
               <div className="relative">
                 <input
@@ -99,10 +99,10 @@ export default function ChatPage() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Ask about credit scoring or upload a CSV file for analysis..."
-                  className="w-full p-4 pr-28 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-700 bg-white shadow-sm text-base transition-colors"
+                  className="w-full p-5 pr-32 border-2 border-purple-100 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 text-gray-700 bg-white shadow-sm text-base transition-colors placeholder-gray-500"
                   disabled={isLoading}
                 />
-                <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
                   <input
                     type="file"
                     ref={fileInputRef}
@@ -114,7 +114,7 @@ export default function ChatPage() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="p-2 text-gray-500 hover:text-gray-700 transition-colors rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="p-2.5 text-purple-600 hover:text-purple-700 transition-colors rounded-lg hover:bg-purple-50 focus:outline-none focus:ring-2 focus:ring-purple-500"
                     disabled={isLoading}
                     aria-label="Upload file"
                   >
@@ -124,7 +124,7 @@ export default function ChatPage() {
                   </button>
                   <button
                     type="submit"
-                    className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-2.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isLoading}
                     aria-label="Send message"
                   >
@@ -140,9 +140,9 @@ export default function ChatPage() {
             )}
           </div>
         </div>
-        <div className="text-center mt-6">
-          <Link href="/" className="inline-flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
-            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="text-center mt-8">
+          <Link href="/" className="inline-flex items-center px-8 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors shadow-md font-medium">
+            <svg className="w-5 h-5 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
             Dashboard

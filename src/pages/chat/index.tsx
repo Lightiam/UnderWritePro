@@ -3,6 +3,8 @@ import { APP_NAME } from '../../lib/utils'
 import Link from 'next/link'
 import Head from 'next/head'
 import Script from 'next/script'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle, faPaperclip, faPaperPlane, faHome } from '@fortawesome/free-solid-svg-icons'
 
 export default function ChatPage() {
   const [message, setMessage] = React.useState('')
@@ -52,15 +54,15 @@ export default function ChatPage() {
           <p className="mt-4 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
           <ul className="mt-8 space-y-4">
             <li className="flex items-center p-5 border border-purple-100 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors">
-              <i className="fas fa-check-circle text-purple-600 mr-4 text-xl"></i>
+              <FontAwesomeIcon icon={faCheckCircle} className="text-purple-600 mr-4 text-xl" />
               <span className="text-purple-900">Analyzing credit applications and data</span>
             </li>
             <li className="flex items-center p-5 border border-purple-100 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors">
-              <i className="fas fa-check-circle text-purple-600 mr-4 text-xl"></i>
+              <FontAwesomeIcon icon={faCheckCircle} className="text-purple-600 mr-4 text-xl" />
               <span className="text-purple-900">Providing detailed risk assessments</span>
             </li>
             <li className="flex items-center p-5 border border-purple-100 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors">
-              <i className="fas fa-check-circle text-purple-600 mr-4 text-xl"></i>
+              <FontAwesomeIcon icon={faCheckCircle} className="text-purple-600 mr-4 text-xl" />
               <span className="text-purple-900">Explaining credit decisions</span>
             </li>
           </ul>
@@ -86,13 +88,13 @@ export default function ChatPage() {
                   onClick={() => fileInputRef.current?.click()}
                   className="p-2.5 text-purple-600 hover:text-purple-800 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors"
                 >
-                  <i className="fas fa-paperclip text-xl"></i>
+                  <FontAwesomeIcon icon={faPaperclip} className="text-xl" />
                 </button>
                 <button
                   type="submit"
                   className="p-2.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
                 >
-                  <i className="fas fa-paper-plane text-xl"></i>
+                  <FontAwesomeIcon icon={faPaperPlane} className="text-xl" />
                 </button>
               </div>
             </div>
@@ -100,7 +102,7 @@ export default function ChatPage() {
         </div>
         <div className="text-center mt-8">
           <Link href="/" className="inline-flex items-center px-8 py-4 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors shadow-lg hover:shadow-xl">
-            <i className="fas fa-home mr-3 text-lg"></i>
+            <FontAwesomeIcon icon={faHome} className="mr-3 text-lg" />
             Dashboard
           </Link>
         </div>

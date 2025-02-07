@@ -11,7 +11,12 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-  trailingSlash: true
+  trailingSlash: true,
+  basePath: '',
+  assetPrefix: '',
+  experimental: {
+    appDir: true
+  }
 }
 
 module.exports = nextConfig

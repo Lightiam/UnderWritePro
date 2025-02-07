@@ -63,15 +63,18 @@ export default function ChatPage() {
         <div className="bg-white shadow-lg rounded-xl p-8 max-w-2xl mx-auto">
           <h2 className="text-2xl font-semibold">Credit Analysis Assistant</h2>
           <p className="mt-3">Get instant insights about credit scoring and risk assessment.</p>
-          <ul className="mt-5">
-            <li className="border p-4 mb-2 rounded">
-              <i className="fas fa-check-circle text-green-500"></i> Analyzing credit applications and data
+          <ul className="mt-5 space-y-3">
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg">
+              <i className="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
+              <span className="text-gray-700">Analyzing credit applications and data</span>
             </li>
-            <li className="border p-4 mb-2 rounded">
-              <i className="fas fa-check-circle text-green-500"></i> Providing detailed risk assessments
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg">
+              <i className="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
+              <span className="text-gray-700">Providing detailed risk assessments</span>
             </li>
-            <li className="border p-4 mb-2 rounded">
-              <i className="fas fa-check-circle text-green-500"></i> Explaining credit decisions
+            <li className="flex items-center p-4 border border-gray-200 rounded-lg">
+              <i className="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
+              <span className="text-gray-700">Explaining credit decisions</span>
             </li>
           </ul>
           <div className="mt-10">
@@ -82,7 +85,7 @@ export default function ChatPage() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Ask about credit scoring or upload a CSV file for analysis..."
-                  className="w-full p-4 pr-24 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-700 bg-white shadow-sm text-base transition-colors placeholder-gray-500"
+                  className="w-full p-4 pr-24 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 bg-white shadow-sm text-base transition-colors placeholder-gray-500"
                   disabled={isLoading}
                 />
                 <div className="absolute right-2 top-2 flex space-x-2">
@@ -105,7 +108,7 @@ export default function ChatPage() {
                   </button>
                   <button
                     type="submit"
-                    className="p-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                    className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
                     disabled={isLoading}
                     aria-label="Send message"
                   >
@@ -120,7 +123,7 @@ export default function ChatPage() {
           </div>
         </div>
         <div className="text-center mt-8">
-          <Link href="/" className="inline-flex items-center px-8 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors shadow-md font-medium">
+          <Link href="/" className="inline-flex items-center px-8 py-3 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors shadow-md font-medium">
             <svg className="w-5 h-5 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>

@@ -12,9 +12,7 @@ const nextConfig = {
   },
   distDir: 'out',
   trailingSlash: true,
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   experimental: {
-    appDir: true,
     typedRoutes: true
   }
 }

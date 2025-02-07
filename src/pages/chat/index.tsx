@@ -75,15 +75,15 @@ export default function ChatPage() {
           <p className="mt-3">Get instant insights about credit scoring and risk assessment.</p>
           <ul className="mt-5 space-y-3">
             <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
-              <i className="fas fa-chart-line text-blue-500 mr-3 text-xl"></i>
+              <i className="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
               <span className="text-gray-700">Analyzing credit applications and data</span>
             </li>
             <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
-              <i className="fas fa-shield-alt text-blue-500 mr-3 text-xl"></i>
+              <i className="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
               <span className="text-gray-700">Providing detailed risk assessments</span>
             </li>
             <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow">
-              <i className="fas fa-comments text-blue-500 mr-3 text-xl"></i>
+              <i className="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
               <span className="text-gray-700">Explaining credit decisions</span>
             </li>
           </ul>

@@ -69,17 +69,17 @@ export default function ChatPage() {
           <h2 className="text-2xl font-semibold text-gray-800 mb-3">Credit Analysis Assistant</h2>
           <p className="mt-2 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
           <ul className="mt-5 space-y-3">
-            <li className="border border-gray-200 p-3.5 rounded-lg flex items-center bg-white shadow-sm">
+            <li className="border border-gray-100 p-3 rounded-lg flex items-center bg-white">
               <i className="fas fa-check-circle text-green-500 mr-3"></i>
-              <span className="text-gray-700">Analyzing credit applications and data</span>
+              <span className="text-gray-600">Analyzing credit applications and data</span>
             </li>
-            <li className="border border-gray-200 p-3.5 rounded-lg flex items-center bg-white shadow-sm">
+            <li className="border border-gray-100 p-3 rounded-lg flex items-center bg-white">
               <i className="fas fa-check-circle text-green-500 mr-3"></i>
-              <span className="text-gray-700">Providing detailed risk assessments</span>
+              <span className="text-gray-600">Providing detailed risk assessments</span>
             </li>
-            <li className="border border-gray-200 p-3.5 rounded-lg flex items-center bg-white shadow-sm">
+            <li className="border border-gray-100 p-3 rounded-lg flex items-center bg-white">
               <i className="fas fa-check-circle text-green-500 mr-3"></i>
-              <span className="text-gray-700">Explaining credit decisions</span>
+              <span className="text-gray-600">Explaining credit decisions</span>
             </li>
           </ul>
           <div className="mt-6">
@@ -126,7 +126,7 @@ export default function ChatPage() {
           </div>
         </div>
         <div className="text-center mt-6">
-          <Link href="/" className="inline-flex items-center px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors shadow-sm">
+          <Link href="/" className="inline-flex items-center px-6 py-3 bg-[#7C3AED] text-white rounded-lg hover:bg-[#6D28D9] transition-colors shadow-sm">
             <i className="fas fa-home mr-2"></i>
             Dashboard
           </Link>

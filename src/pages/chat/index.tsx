@@ -62,24 +62,33 @@ export default function ChatPage() {
         <div className="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto">
           <h2 className="text-2xl font-semibold text-gray-800 mb-3">Credit Analysis Assistant</h2>
           <p className="mt-2 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
-          <ul className="mt-5 space-y-3">
-            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white">
-              <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+          <ul className="mt-5 space-y-4">
+            <li className="flex items-start p-4 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors">
+              <svg className="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              <span className="text-gray-700">Analyzing credit applications and data</span>
+              <div>
+                <span className="text-gray-700 font-medium">Analyzing Credit Data</span>
+                <p className="text-sm text-gray-500 mt-1">Process applications and evaluate financial information for accurate credit scoring</p>
+              </div>
             </li>
-            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white">
-              <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+            <li className="flex items-start p-4 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors">
+              <svg className="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              <span className="text-gray-700">Providing detailed risk assessments</span>
+              <div>
+                <span className="text-gray-700 font-medium">Risk Assessment</span>
+                <p className="text-sm text-gray-500 mt-1">Generate comprehensive risk profiles using advanced AI analysis</p>
+              </div>
             </li>
-            <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white">
-              <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+            <li className="flex items-start p-4 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors">
+              <svg className="w-6 h-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              <span className="text-gray-700">Explaining credit decisions</span>
+              <div>
+                <span className="text-gray-700 font-medium">Decision Explanation</span>
+                <p className="text-sm text-gray-500 mt-1">Provide clear, detailed explanations for credit decisions and recommendations</p>
+              </div>
             </li>
           </ul>
           <div className="mt-6">

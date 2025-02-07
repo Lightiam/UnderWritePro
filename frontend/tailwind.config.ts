@@ -9,11 +9,8 @@ const config: Config = {
     extend: {
       colors: {
         purple: {
-          300: 'rgb(233, 213, 255)',
-          600: 'rgb(147, 51, 234)',
-        },
-        slate: {
-          900: 'rgb(30, 41, 59)',
+          600: '#9333EA',
+          700: '#7E22CE',
         },
       },
       fontFamily: {

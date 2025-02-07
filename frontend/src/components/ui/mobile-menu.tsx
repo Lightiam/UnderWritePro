@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from './button';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = React.useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const menuItems = [
     { label: 'Product', href: '#product' },
@@ -46,7 +46,7 @@ export function MobileMenu() {
             <Button 
               size="lg" 
               onClick={() => {
-                navigate('/chat');
+                router.push('/chat');
                 setIsOpen(false);
               }}
               className="w-full"

@@ -12,9 +12,8 @@ const nextConfig = {
   },
   trailingSlash: true,
   distDir: 'out',
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  basePath: '',
-  assetPrefix: ''
+  swcMinify: true,
+  reactStrictMode: true
 }
 
 module.exports = nextConfig

@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { Button } from './button'
 import { PaperClipIcon, SendIcon } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 
 interface Message {
   role: 'user' | 'assistant'

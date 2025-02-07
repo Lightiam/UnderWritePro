@@ -10,6 +10,12 @@ const nextConfig = {
   distDir: 'out',
   typescript: {
     ignoreBuildErrors: true
+  },
+  exportPathMap: async function() {
+    return {
+      '/': { page: '/' },
+      '/chat': { page: '/chat' }
+    }
   }
 }
 

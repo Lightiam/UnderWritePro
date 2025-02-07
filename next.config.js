@@ -7,11 +7,13 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL: 'https://lendify-ai-api.netlify.app/.netlify/functions/api',
   },
-  distDir: 'out',
+  trailingSlash: true,
   typescript: {
     ignoreBuildErrors: true
   },
-  trailingSlash: true,
+  basePath: '',
+  assetPrefix: '',
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   webpack: (config) => {
     config.resolve.fallback = { fs: false, path: false }
     return config

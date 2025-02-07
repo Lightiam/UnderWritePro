@@ -2,6 +2,7 @@ import * as React from 'react'
 import { APP_NAME } from '../../lib/utils'
 import Link from 'next/link'
 import Head from 'next/head'
+import Script from 'next/script'
 
 export default function ChatPage() {
   const [message, setMessage] = React.useState('')
@@ -43,6 +44,7 @@ export default function ChatPage() {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
       </Head>
+      <Script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" strategy="beforeInteractive" />
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-center mb-8">{APP_NAME}</h1>
         <div className="bg-white shadow-lg rounded-xl p-6 max-w-2xl mx-auto">

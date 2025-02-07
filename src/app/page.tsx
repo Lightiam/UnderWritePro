@@ -4,6 +4,14 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { APP_NAME } from '@/lib/utils'
 
+export const metadata = {
+  title: 'Lendify AI - Credit Scoring Platform',
+  description: 'AI-powered credit scoring and risk assessment platform',
+}
+
+export const dynamic = 'force-static'
+export const revalidate = false
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white">
@@ -79,4 +87,5 @@ export default function Home() {
       </div>
     </div>
   )
+}
 }

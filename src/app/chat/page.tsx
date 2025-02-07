@@ -6,6 +6,9 @@ import { ErrorBoundary } from '@/components/ui/error-boundary'
 import { APP_NAME } from '@/lib/utils'
 import Link from 'next/link'
 
+export const dynamic = 'force-static'
+export const revalidate = false
+
 export default function ChatPage() {
   return (
     <div className="min-h-screen bg-white">

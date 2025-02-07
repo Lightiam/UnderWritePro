@@ -397,7 +397,7 @@ export function Chat() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-12rem)] max-h-[800px]">
+    <div className="flex flex-col h-[calc(100vh-12rem)] max-h-[800px] bg-gray-50 rounded-lg shadow-lg">
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {messages.map((msg, index) => (
           <div
@@ -407,8 +407,8 @@ export function Chat() {
             <div
               className={`max-w-[80%] rounded-lg p-4 ${
                 msg.isUser
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-white border border-gray-200'
+                  ? 'bg-purple-600 text-white shadow-md'
+                  : 'bg-white shadow-sm'
               }`}
             >
               {msg.content}
@@ -425,28 +425,41 @@ export function Chat() {
         <div ref={messagesEndRef} />
       </div>
 
-      <form onSubmit={handleSubmit} className="p-4 border-t bg-white">
-        <div className="flex items-center gap-2">
-          <input
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Ask about credit scoring or upload documents for analysis..."
-            className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
-            disabled={isLoading}
-          />
-          <label className="cursor-pointer">
+      <form onSubmit={handleSubmit} className="p-4 border-t bg-white shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="flex-1 relative">
             <input
-              type="file"
-              onChange={handleFileUpload}
-              accept=".csv,.pdf,.doc,.docx"
-              className="hidden"
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Ask about credit scoring or upload documents for analysis..."
+              className="w-full p-3 pr-12 border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
               disabled={isLoading}
             />
-            <span className="text-2xl hover:opacity-75">📎</span>
-          </label>
+            <label className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
+              <input
+                type="file"
+                onChange={handleFileUpload}
+                accept=".csv,.pdf,.doc,.docx"
+                className="hidden"
+                disabled={isLoading}
+              />
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 hover:text-purple-600 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+              </svg>
+            </label>
+          </div>
+          <button
+            type="submit"
+            disabled={isLoading || !message.trim()}
+            className="p-3 rounded-lg bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13h11m-4-4l4 4-4 4" />
+            </svg>
+          </button>
         </div>
-        <p className="mt-2 text-sm text-gray-500">
+        <p className="mt-2 text-xs text-gray-500">
           Press Enter to send • Upload CSV, PDF, DOC, or DOCX files for instant credit analysis
         </p>
       </form>

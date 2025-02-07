@@ -12,10 +12,10 @@ const nextConfig = {
     ignoreBuildErrors: true
   },
   trailingSlash: true,
-  basePath: '',
-  assetPrefix: '',
-  experimental: {
-    appDir: true
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false, path: false }
+    return config
   }
 }
 

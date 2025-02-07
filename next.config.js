@@ -15,9 +15,12 @@ const nextConfig = {
     config.resolve.fallback = { fs: false, net: false, tls: false }
     return config
   },
+  trailingSlash: true,
+  basePath: '',
+  assetPrefix: '',
   experimental: {
-    appDir: true,
-    typedRoutes: true
+    optimizeCss: true,
+    optimizePackageImports: ['@radix-ui/react-icons', 'lucide-react']
   }
 }
 

@@ -11,9 +11,8 @@ export const metadata = {
 
 export const dynamic = 'force-static'
 export const revalidate = false
-export const generateStaticParams = async () => []
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

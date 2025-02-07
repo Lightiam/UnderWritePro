@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from 'react'
 import { Chat } from '@/components/ui/chat-new'
 import { ErrorBoundary } from '@/components/ui/error-boundary'
@@ -8,9 +6,8 @@ import Link from 'next/link'
 
 export const dynamic = 'force-static'
 export const revalidate = false
-export const generateStaticParams = async () => []
 
-export default function ChatPage() {
+export default async function ChatPage() {
   return (
     <div className="min-h-screen bg-white">
       <header className="py-4 px-6 border-b">

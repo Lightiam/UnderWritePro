@@ -3,12 +3,6 @@ const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
   },
   env: {
     NEXT_PUBLIC_API_URL: 'https://lendify-ai-api.netlify.app/.netlify/functions/api',
@@ -16,7 +10,12 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true
   },
-  trailingSlash: true
+  trailingSlash: true,
+  distDir: 'out',
+  experimental: {
+    appDir: true,
+    serverActions: false
+  }
 }
 
 module.exports = nextConfig

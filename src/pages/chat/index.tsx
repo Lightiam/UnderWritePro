@@ -64,15 +64,21 @@ export default function ChatPage() {
           <p className="mt-2 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
           <ul className="mt-5 space-y-3">
             <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white">
-              <i className="fas fa-check-circle text-green-500 mr-3"></i>
+              <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
               <span className="text-gray-700">Analyzing credit applications and data</span>
             </li>
             <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white">
-              <i className="fas fa-check-circle text-green-500 mr-3"></i>
+              <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
               <span className="text-gray-700">Providing detailed risk assessments</span>
             </li>
             <li className="flex items-center p-4 border border-gray-200 rounded-lg bg-white">
-              <i className="fas fa-check-circle text-green-500 mr-3"></i>
+              <svg className="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
               <span className="text-gray-700">Explaining credit decisions</span>
             </li>
           </ul>
@@ -102,14 +108,18 @@ export default function ChatPage() {
                     className="p-2.5 text-gray-500 hover:text-gray-700 transition-colors rounded-lg hover:bg-gray-50"
                     disabled={isLoading}
                   >
-                    <i className="fas fa-paperclip text-xl"></i>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                    </svg>
                   </button>
                   <button
                     type="submit"
                     className="p-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center shadow-sm"
                     disabled={isLoading}
                   >
-                    <i className="fas fa-paper-plane text-xl"></i>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
                   </button>
                 </div>
               </div>
@@ -121,7 +131,9 @@ export default function ChatPage() {
         </div>
         <div className="text-center mt-6">
           <Link href="/" className="inline-flex items-center px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
-            <i className="fas fa-home mr-2"></i>
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
             Dashboard
           </Link>
         </div>

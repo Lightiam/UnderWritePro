@@ -61,9 +61,9 @@ export default function ChatPage() {
       <div className="container mx-auto px-6 py-12">
         <h1 className="text-4xl font-bold text-center mb-8">UnderwritePro AI</h1>
         <div className="bg-white shadow-lg rounded-xl p-8 max-w-2xl mx-auto">
-          <h2 className="text-3xl font-semibold text-gray-800 mb-4">Credit Analysis Assistant</h2>
-          <p className="text-lg text-gray-600 mb-8">Get instant insights about credit scoring and risk assessment.</p>
-          <ul className="mt-6 space-y-4">
+          <h2 className="text-2xl font-semibold">Credit Analysis Assistant</h2>
+          <p className="mt-3">Get instant insights about credit scoring and risk assessment.</p>
+          <ul className="mt-5">
             <li className="border p-4 mb-2 rounded">
               <i className="fas fa-check-circle text-green-500"></i> Analyzing credit applications and data
             </li>

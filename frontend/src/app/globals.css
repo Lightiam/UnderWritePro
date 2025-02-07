@@ -4,7 +4,7 @@
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 250, 245, 255;
   --background-end-rgb: 255, 255, 255;
 }
 
@@ -16,4 +16,13 @@ body {
     rgb(var(--background-end-rgb))
   );
   min-height: 100vh;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply antialiased;
+  }
 }

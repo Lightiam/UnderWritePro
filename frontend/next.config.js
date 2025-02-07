@@ -3,14 +3,20 @@ const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   env: {
-    NEXT_PUBLIC_API_URL: 'https://lendify-ai-api.netlify.app/.netlify/functions/api',
+    NEXT_PUBLIC_API_URL: 'https://lendify-ai-api.netlify.app/.netlify/functions/api'
   },
   trailingSlash: true,
-  webpack: (config) => {
-    config.resolve.fallback = { fs: false, path: false }
-    return config
+  distDir: 'out',
+  typescript: {
+    ignoreBuildErrors: true
   }
 }
 

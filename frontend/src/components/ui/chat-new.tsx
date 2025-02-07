@@ -8,8 +8,8 @@ import { Button } from './button';
 interface Factor {
   name: string;
   score: number;
+  weight?: number;
   impact: string;
-  weight: number;
 }
 
 interface ApiResponse {
@@ -26,7 +26,11 @@ interface Message {
   isUser: boolean;
 }
 
-export function Chat() {
+interface Props {
+  className?: string;
+}
+
+export function Chat({ className = "" }: Props) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<Message[]>([{
     content: "Hello! I'm your AI credit scoring assistant. How can I help you today? You can ask me questions about credit scoring or upload documents for analysis.",
@@ -35,6 +39,8 @@ export function Chat() {
   const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [isTyping, setIsTyping] = useState(false);
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -44,186 +50,235 @@ export function Chat() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const TypingIndicator = () => (
+    <div className="flex items-center space-x-2">
+      <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" />
+      <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce delay-100" />
+      <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce delay-200" />
+    </div>
+  );
+
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     if (!message.trim() && !file) return;
 
     const userMessage = message.trim();
-    setMessages((prev) => [...prev, { content: userMessage, isUser: true }]);
+    setMessages((prev: Message[]) => [...prev, { content: userMessage, isUser: true }]);
     setIsLoading(true);
     setMessage('');
+    setIsTyping(true);
 
-    // Check API health
     try {
-      const healthCheck = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/health`);
+      if (!apiUrl) {
+        throw new Error('API URL is not configured');
+      }
+
+      // Check API health first
+      const healthCheck = await fetch(`${apiUrl}/health`);
       if (!healthCheck.ok) {
         throw new Error('API service is currently unavailable. Please try again later.');
       }
-    } catch (error) {
-      setIsLoading(false);
-      setMessages((prev) => [...prev, { 
-        content: (
-          <Alert variant="destructive">
-            <AlertDescription>
-              Cannot connect to the API. Please check your internet connection and try again.
-            </AlertDescription>
-          </Alert>
-        ),
-        isUser: false 
-      }]);
-      return;
-    }
+      const healthData = await healthCheck.json();
+      
+      if (!healthData.openai_configured) {
+        throw new Error('OpenAI API is not properly configured. Please try again later.');
+      }
 
-    // Add typing indicator
-    setMessages((prev) => [...prev, {
-      content: (
-        <div className="flex items-center space-x-2">
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" />
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-100" />
-          <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce delay-200" />
-        </div>
-      ),
-      isUser: false
-    }]);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chat`, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          content: userMessage,
+          model: "gpt-3.5-turbo",
+          max_tokens: 500,
+          temperature: 0.7,
+          system_message: "You are an AI credit scoring assistant for Lendify AI. Help users understand credit profiles, loan applications, risk assessment, and debt management. Be professional and provide actionable recommendations."
+        })
+      });
 
-    try {
-      // Add typing indicator while checking API health
-      const TypingIndicator = () => (
-        <div className="flex items-center space-x-2">
-          <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" />
-          <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce delay-100" />
-          <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce delay-200" />
-        </div>
-      );
+      if (!response.ok) {
+        throw new Error(`API request failed with status ${response.status}`);
+      }
 
-      setMessages((prev) => [...prev, { 
-        content: <TypingIndicator />,
-        isUser: false 
-      }]);
-
-      // Check API health first
-      const healthCheck = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
-      if (!healthCheck.ok) {
-        throw new Error('API service is currently unavailable. Please try again later.');
+      const data: ApiResponse = await response.json();
+      
+      // Remove typing indicator
+      setMessages((prev: Message[]) => prev.filter(msg => msg.content !== <TypingIndicator />));
+      
+      if (!response.ok || data.error) {
+        const errorMessage = data.error || `API request failed with status ${response.status}`;
+        setMessages((prev: Message[]) => [...prev, { 
+          content: (
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-sm text-red-700">Error: {errorMessage}</p>
+              <p className="text-xs text-red-600 mt-1">Please try again or contact support if the issue persists.</p>
+            </div>
+          ), 
+          isUser: false 
+        }]);
+        setIsTyping(false);
+        setIsLoading(false);
+        return;
       }
       
-      const healthData = await healthCheck.json();
-      if (!healthData.openai_configured) {
-        throw new Error('OpenAI API is not configured. Please try again later.');
-      }
-
-      // Remove typing indicator after health check
-      setMessages((prev) => prev.slice(0, -1));
-
-      // Add typing indicator for API request
-      setMessages((prev) => [...prev, { 
-        content: <TypingIndicator />,
-        isUser: false 
-      }]);
-
-      const apiUrl = 'https://lendify-ai-api.netlify.app/.netlify/functions/api';
-
-      // Check API health first
-      try {
-        const healthCheck = await fetch(`${apiUrl}/health`);
-        if (!healthCheck.ok) {
-          throw new Error('API service is currently unavailable');
-        }
-        const healthData = await healthCheck.json();
-        if (!healthData.openai_configured) {
-          throw new Error('OpenAI API is not configured');
-        }
-      } catch (error) {
-        throw new Error('Cannot connect to the API. Please try again later.');
-      }
-
-      try {
-        const response = await fetch(`${apiUrl}/chat`, {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({ content: userMessage })
-        });
-
-        if (!response.ok) {
-          throw new Error(`API request failed with status ${response.status}`);
-        }
-
-        const data: ApiResponse = await response.json();
-        
-        if (data.error) {
-          throw new Error(data.error);
-        }
-
-        // Remove typing indicator before adding response
-        setMessages((prev) => prev.slice(0, -1));
-
-        setMessages((prev) => [...prev, {
-          content: data.message || 'No response from server',
-          isUser: false
-        }]);
-
-      } catch (error) {
-        // Remove typing indicator
-        setMessages((prev) => prev.slice(0, -1));
-        
-        setMessages((prev) => [...prev, {
+      if (data.message) {
+        setMessages((prev: Message[]) => [...prev, { 
           content: (
-            <div className="text-red-500">
-              Error: {error instanceof Error ? error.message : 'An unexpected error occurred'}
+            <div className="p-4 bg-white rounded-lg shadow-sm">
+              <p className="text-sm text-gray-800">{data.message}</p>
+            </div>
+          ), 
+          isUser: false 
+        }]);
+      } else if (data.credit_score) {
+        setMessages((prev: Message[]) => [...prev, {
+          content: (
+            <div className="space-y-4 p-4 bg-white rounded-lg shadow-sm">
+              <h3 className="text-lg font-semibold text-gray-900">Credit Score Analysis</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 bg-blue-50 rounded-lg border border-blue-100">
+                  <p className="text-3xl font-bold text-blue-600">{data.credit_score}</p>
+                  <p className="text-sm text-blue-600 mt-1">Credit Score</p>
+                </div>
+                {data.details && (
+                  <div className="p-4 bg-gray-50 rounded-lg border border-gray-100">
+                    <p className="text-sm font-medium text-gray-700">{data.details}</p>
+                  </div>
+                )}
+              </div>
+              {data.factors && (
+                <div className="space-y-3">
+                  <h4 className="font-medium text-gray-900">Key Factors</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {data.factors.map((factor, index) => (
+                      <div key={index} className="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                        <p className="text-sm font-medium text-gray-800">{factor.name}</p>
+                        <div className="flex items-center mt-1">
+                          <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                            factor.impact === 'Excellent' ? 'bg-green-100 text-green-800' :
+                            factor.impact === 'Very Good' ? 'bg-blue-100 text-blue-800' :
+                            factor.impact === 'Good' ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-gray-100 text-gray-800'
+                          }`}>
+                            {factor.impact}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {data.recommendations && (
+                <div className="space-y-3">
+                  <h4 className="font-medium text-gray-900">Recommendations</h4>
+                  <ul className="space-y-2">
+                    {data.recommendations.map((rec, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="flex-shrink-0 h-5 w-5 text-blue-500">•</span>
+                        <span className="ml-2 text-sm text-gray-600">{rec}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           ),
           isUser: false
         }]);
+      } else {
+        throw new Error('Invalid response format from API');
       }
-
-      // Previous API call already handled the response
-      return;
+      
+      // Scroll to bottom after new message
+      setTimeout(scrollToBottom, 100);
     } catch (error) {
-      console.error('Error:', error);
-      setMessages((prev) => [...prev, { 
+      console.error('Error in chat:', error);
+      setIsTyping(false);
+      setMessages((prev: Message[]) => [...prev, {
         content: (
           <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
             <p className="text-sm text-red-700">
-              {error instanceof Error ? error.message : 'Sorry, I could not process your request. Please try again.'}
+              {error instanceof Error ? error.message : 'An unexpected error occurred'}
+            </p>
+            <p className="text-xs text-red-600 mt-1">
+              Please try again or contact support if the issue persists.
             </p>
           </div>
         ),
-        isUser: false 
+        isUser: false
       }]);
     } finally {
       setIsLoading(false);
+      setTimeout(scrollToBottom, 100);
     }
   };
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    const supportedTypes = ['.csv', '.pdf', '.doc', '.docx'];
+    const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+    setIsTyping(true);
+    
+    if (!supportedTypes.includes(fileExtension)) {
+      setMessages((prev: Message[]) => [...prev, {
+        content: (
+          <Alert variant="destructive">
+            <AlertDescription className="flex items-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span>Please upload a CSV, PDF, DOC, or DOCX file for credit analysis.</span>
+            </AlertDescription>
+          </Alert>
+        ),
+        isUser: false
+      }]);
+      if (e.target) e.target.value = '';
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      setMessages((prev: Message[]) => [...prev, {
+        content: (
+          <Alert variant="destructive">
+            <AlertDescription className="flex items-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span>File size must be less than 10MB.</span>
+            </AlertDescription>
+          </Alert>
+        ),
+        isUser: false
+      }]);
+      if (e.target) e.target.value = '';
+      return;
+    }
+
     setFile(file);
-    setMessages((prev) => [...prev, { 
-      content: `Uploading file: ${file.name}...`,
+    setMessages((prev: Message[]) => [...prev, { 
+      content: (
+        <div className="flex items-center space-x-2 text-blue-600">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span>Analyzing {file.name}...</span>
+        </div>
+      ),
       isUser: true 
     }]);
     setIsLoading(true);
 
     try {
-      setMessages((prev) => [...prev, { 
-        content: (
-          <div className="flex items-center space-x-2 text-blue-600">
-            <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            <span>Analyzing {file.name}...</span>
-          </div>
-        ),
+      setMessages((prev: Message[]) => [...prev, { 
+        content: <TypingIndicator />,
         isUser: false 
       }]);
 
-      const apiUrl = 'https://lendify-ai-api.netlify.app/.netlify/functions/api';
       const reader = new FileReader();
       reader.onload = async (event) => {
         const content = event.target?.result;
@@ -231,11 +286,14 @@ export function Chat() {
           throw new Error('Failed to read file content');
         }
 
+      if (!apiUrl) {
+        throw new Error('API URL is not configured');
+      }
+
       const response = await fetch(`${apiUrl}/upload`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
         },
         body: JSON.stringify({
           filename: file.name,
@@ -247,34 +305,46 @@ export function Chat() {
         throw new Error(`File upload failed with status ${response.status}`);
       }
 
-      const data = await response.json();
+      const data: ApiResponse = await response.json();
       if (data.error) {
         throw new Error(data.error);
       }
 
-      setMessages((prev) => [...prev, { 
+      // Remove typing indicator
+      setMessages((prev: Message[]) => prev.slice(0, -1));
+
+      setMessages((prev: Message[]) => [...prev, { 
         content: (
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Credit Score Analysis</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 bg-blue-50 rounded-lg">
-                <p className="text-2xl font-bold text-blue-600">{data.credit_score}</p>
-                <p className="text-sm text-blue-600">Credit Score</p>
-              </div>
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-sm font-medium">{data.details}</p>
+          <div className="space-y-4 p-4 bg-white rounded-lg border">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-semibold text-blue-800">Credit Score Analysis</h3>
+              <div className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                Score: {data.credit_score}
               </div>
             </div>
+            
+            <div className="text-sm text-gray-700">{data.details}</div>
             {data.factors && (
-              <div className="space-y-2">
-                <h4 className="font-medium">Key Factors</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                  {data.factors.map((factor: Factor, index: number) => (
-                    <div key={`upload-factor-${index}`} className="p-2 bg-gray-50 rounded">
-                      <p className="text-sm font-medium">{factor.name}</p>
-                      <div className="flex justify-between items-center">
-                        <p className="text-xs text-gray-600">Impact: {factor.impact}</p>
-                        <p className="text-xs font-medium text-blue-600">Score: {factor.score}</p>
+              <div className="space-y-3">
+                <h4 className="font-medium text-gray-900">Key Factors</h4>
+                <div className="grid gap-2">
+                  {data.factors.map((factor, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-sm font-medium text-gray-800">{factor.name}</span>
+                        <span className="px-2 py-1 text-xs font-medium text-blue-700 bg-blue-100 rounded-full">
+                          {factor.impact}
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="text-xs text-gray-500">Weight: {factor.weight}%</div>
+                        <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                          <div 
+                            className="h-full bg-blue-600 rounded-full transition-all duration-500"
+                            style={{ width: `${factor.score}%` }}
+                          />
+                        </div>
+                        <span className="text-sm font-medium text-blue-700">{factor.score}%</span>
                       </div>
                     </div>
                   ))}
@@ -282,13 +352,20 @@ export function Chat() {
               </div>
             )}
             {data.recommendations && (
-              <div className="space-y-2">
-                <h4 className="font-medium">Recommendations</h4>
-                <ul className="list-disc list-inside space-y-1">
-                  {data.recommendations.map((rec: string, index: number) => (
-                    <li key={`upload-rec-${index}`} className="text-sm text-gray-600">{rec}</li>
+              <div className="space-y-3 mt-4">
+                <h4 className="font-medium text-gray-900">Recommendations</h4>
+                <div className="space-y-2">
+                  {data.recommendations.map((rec, index) => (
+                    <div key={index} className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
+                      <div className="flex-shrink-0 w-5 h-5 mt-0.5">
+                        <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <p className="text-sm text-blue-900">{rec}</p>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
           </div>
@@ -299,8 +376,10 @@ export function Chat() {
 
     reader.readAsText(file);
     } catch (error) {
-      console.error('Upload error:', error);
-      setMessages((prev) => [...prev, { 
+      // Remove typing indicator
+      setMessages((prev: Message[]) => prev.slice(0, -1));
+      
+      setMessages((prev: Message[]) => [...prev, {
         content: (
           <Alert variant="destructive">
             <AlertDescription>
@@ -318,104 +397,53 @@ export function Chat() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)]">
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-br from-blue-50 to-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="mb-8 text-center">
-            <h1 className="text-4xl font-bold text-blue-900">Lendify AI Assistant</h1>
-            <p className="text-xl text-blue-600 mt-2">Get instant insights about credit scoring and risk assessment</p>
+    <div className="space-y-4">
+      <div className="space-y-4">
+        {messages.map((msg, index) => (
+          <div key={index} className="space-y-2">
+            <span className="text-sm font-medium text-gray-500">
+              {msg.isUser ? 'You' : 'AI'}
+            </span>
+            <p className="text-gray-800">{msg.content}</p>
           </div>
-          <div className="space-y-4">
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}
-              >
-                {!msg.isUser && (
-                  <div className="flex-shrink-0 mr-3">
-                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                      <span className="text-sm font-medium text-blue-600">AI</span>
-                    </div>
-                  </div>
-                )}
-                <div
-                  className={`max-w-[80%] rounded-lg p-4 shadow-sm ${
-                    msg.isUser
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-white text-gray-900 border border-gray-100'
-                  }`}
-                >
-                  {msg.content}
-                </div>
-              </div>
-            ))}
-            {isLoading && (
-              <div className="flex justify-start">
-                <div className="flex-shrink-0 mr-3">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                    <span className="text-sm font-medium text-blue-600">AI</span>
-                  </div>
-                </div>
-                <div className="max-w-[80%] rounded-lg p-4 bg-gray-50 text-gray-500">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100" />
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200" />
-                  </div>
-                </div>
-              </div>
-            )}
-            <div ref={messagesEndRef} />
+        ))}
+        {(isLoading || isTyping) && (
+          <div className="space-y-2">
+            <span className="text-sm font-medium text-gray-500">AI</span>
+            <div className="text-gray-800">
+              <TypingIndicator />
+            </div>
           </div>
-        </div>
+        )}
+        <div ref={messagesEndRef} />
       </div>
 
-      <form onSubmit={handleSubmit} className="p-4 border-t bg-white shadow-lg">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col gap-4">
-            <div className="flex gap-4 items-center">
-              <div className="flex-1 relative bg-white rounded-lg shadow-sm">
-                <input
-                  type="text"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Ask about credit scoring or upload a CSV file for analysis..."
-                  className="w-full p-4 pr-12 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white shadow-sm"
-                  disabled={isLoading}
-                />
-                <label className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
-                  <input
-                    type="file"
-                    onChange={handleFileUpload}
-                    accept=".csv,.pdf,.doc,.docx"
-                    className="hidden"
-                    disabled={isLoading}
-                  />
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400 hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
-                  </svg>
-                </label>
-              </div>
-              <Button 
-                type="submit" 
-                disabled={isLoading || (!message.trim() && !file)}
-                className="px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isLoading ? (
-                  <span className="flex items-center space-x-2">
-                    <span>Sending</span>
-                    <span className="w-2 h-2 bg-white rounded-full animate-bounce" />
-                    <span className="w-2 h-2 bg-white rounded-full animate-bounce delay-100" />
-                    <span className="w-2 h-2 bg-white rounded-full animate-bounce delay-200" />
-                  </span>
-                ) : 'Send'}
-              </Button>
-            </div>
-            <p className="text-xs text-gray-500 text-center">
-              Press Enter to send • Upload CSV, PDF, DOC, or DOCX files for instant analysis
-            </p>
-          </div>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="relative">
+          <input
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Ask about credit scoring or upload documents for analysis..."
+            className="w-full p-3 border border-gray-300 rounded-lg pr-12"
+            disabled={isLoading}
+          />
+          <label className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
+            <input
+              type="file"
+              onChange={handleFileUpload}
+              accept=".csv,.pdf,.doc,.docx"
+              className="hidden"
+              disabled={isLoading}
+            />
+            <span className="text-gray-400 hover:text-gray-600">
+              📎
+            </span>
+          </label>
         </div>
+        <p className="text-sm text-gray-500">
+          Press Enter to send • Upload CSV, PDF, DOC, or DOCX files for instant credit analysis
+        </p>
       </form>
     </div>
   );

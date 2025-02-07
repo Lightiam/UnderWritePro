@@ -6,6 +6,7 @@ export default function ChatPage() {
   const [message, setMessage] = React.useState('')
   const [isLoading, setIsLoading] = React.useState(false)
   const [error, setError] = React.useState('')
+  const [messages, setMessages] = React.useState<Array<{type: 'user' | 'assistant', content: string}>>([])
   const fileInputRef = React.useRef<HTMLInputElement>(null)
   const messagesEndRef = React.useRef<HTMLDivElement>(null)
 
@@ -23,7 +24,7 @@ export default function ChatPage() {
 
   React.useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [])
+  }, [messages])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

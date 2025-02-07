@@ -90,10 +90,10 @@ export default function ChatPage() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Ask about credit scoring or upload a CSV file for analysis..."
-                  className="w-full p-4 pr-24 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full p-3 pr-20 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-gray-700"
                   disabled={isLoading}
                 />
-                <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
                   <input
                     type="file"
                     ref={fileInputRef}
@@ -105,17 +105,17 @@ export default function ChatPage() {
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
+                    className="p-2 text-gray-500 hover:text-gray-700 transition-colors"
                     disabled={isLoading}
                   >
-                    <i className="fas fa-paperclip"></i>
+                    <i className="fas fa-paperclip text-lg"></i>
                   </button>
                   <button
                     type="submit"
                     className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center"
                     disabled={isLoading}
                   >
-                    <i className="fas fa-paper-plane"></i>
+                    <i className="fas fa-paper-plane text-lg"></i>
                   </button>
                 </div>
               </div>

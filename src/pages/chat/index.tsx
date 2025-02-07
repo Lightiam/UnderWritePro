@@ -63,12 +63,12 @@ export default function ChatPage() {
           body { font-family: 'Roboto', sans-serif; }
         `}</style>
       </Head>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mb-8">UnderwritePro AI</h1>
-        <div className="bg-white shadow-lg rounded-xl p-6 max-w-2xl mx-auto">
-          <h2 className="text-2xl font-semibold text-gray-800">Credit Analysis Assistant</h2>
-          <p className="mt-3 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
-          <ul className="mt-5">
+      <div className="container mx-auto px-6 py-10">
+        <h1 className="text-3xl font-bold text-center mb-6">UnderwritePro AI</h1>
+        <div className="bg-white shadow-lg rounded-xl p-8 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-2">Credit Analysis Assistant</h2>
+          <p className="mt-2 text-gray-600">Get instant insights about credit scoring and risk assessment.</p>
+          <ul className="mt-6 space-y-4">
             <li className="border border-gray-100 p-4 mb-3 rounded-lg flex items-center bg-white">
               <i className="fas fa-check-circle text-green-500 mr-4"></i>
               <span className="text-gray-600">Analyzing credit applications and data</span>

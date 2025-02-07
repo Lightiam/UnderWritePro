@@ -22,11 +22,11 @@ const nextConfig = {
     return config
   },
   trailingSlash: true,
-  generateStaticParams: async () => {
-    return [
-      { path: '/' },
-      { path: '/chat' }
-    ]
+  exportPathMap: async function() {
+    return {
+      '/': { page: '/' },
+      '/chat': { page: '/chat' }
+    }
   }
 }
 

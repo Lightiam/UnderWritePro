@@ -8,7 +8,13 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  poweredByHeader: false
+  poweredByHeader: false,
+  assetPrefix: '.',
+  basePath: '',
+  generateBuildId: () => 'build',
+  experimental: {
+    appDir: false
+  }
 }
 
 module.exports = nextConfig

@@ -1,17 +1,25 @@
 [build]
   command = "npm run build"
   publish = "out"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ./frontend/"
 
 [build.environment]
   NEXT_PUBLIC_API_URL = "https://lendify-ai-api.netlify.app/.netlify/functions/api"
   NODE_VERSION = "18"
   NEXT_TELEMETRY_DISABLED = "1"
 
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = false
 
 [[headers]]
   for = "/*"
@@ -21,4 +29,4 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; img-src 'self' data: https:; font-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:;"
